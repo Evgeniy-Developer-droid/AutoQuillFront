@@ -1,6 +1,6 @@
 // requests.js
 
-const API_BASE_URL = 'http://localhost:8000';
+const API_BASE_URL = 'http://104.248.194.218';
 const accessToken = () => localStorage.getItem('access_token');
 const refreshToken = () => localStorage.getItem('refresh_token');
 
