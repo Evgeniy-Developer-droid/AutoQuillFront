@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
-import apiRequest from "../../requests";
+import apiRequest from "../../../requests";
 
 
 function ChannelNewPostModal({closeModal}) {

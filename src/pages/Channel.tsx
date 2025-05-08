@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import apiRequest from "../requests";
 import { useParams } from 'react-router-dom';
-import ChannelSettings from "./sources/ChannelSettings";
-import ChannelPosts from "./sources/ChannelPosts";
-import ChannelLogs from "./sources/ChannelLogs";
+import ChannelSettings from "./sources/Channel/ChannelSettings";
+import ChannelPosts from "./sources/Channel/ChannelPosts";
+import ChannelLogs from "./sources/Channel/ChannelLogs";
+import ChannelKBs from "./sources/Channel/ChannelKBs";
 
 
 function Channel( ) {
@@ -12,6 +13,7 @@ function Channel( ) {
     const [tabs, setTabs] = useState([
         { name: "Details", active: true },
         { name: "Posts", active: false },
+        { name: "Knowledge Base", active: false },
         { name: "Settings", active: false },
         { name: "Logs", active: false },
     ]);
@@ -133,6 +135,12 @@ function Channel( ) {
                         <div className={"p-4 bg-base-200"}>
                             <h2 className="text-xl font-bold">Posts</h2>
                             <ChannelPosts/>
+                        </div>
+                    )}
+                    {tab.name === "Knowledge Base" && (
+                        <div className={"p-4 bg-base-200"}>
+                            <h2 className="text-xl font-bold">Knowledge Base</h2>
+                            <ChannelKBs/>
                         </div>
                     )}
                     {tab.name === "Settings" && (

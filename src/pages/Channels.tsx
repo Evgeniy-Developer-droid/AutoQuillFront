@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import apiRequest from "../requests";
-import ChannelNewModal from "./sources/ChannelNewModal";
+import ChannelNewModal from "./sources/Channel/ChannelNewModal";
 
 
 function Channels() {

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import apiRequest from "../../requests";
+import apiRequest from "../../../requests";
 
 function ChannelNewModal({closeModal}) {
     const [name, setName] = useState("");

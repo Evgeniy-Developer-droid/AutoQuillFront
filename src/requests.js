@@ -1,6 +1,7 @@
 // requests.js
 
-const API_BASE_URL = 'http://104.248.194.218';
+// const API_BASE_URL = 'http://104.248.194.218';
+const API_BASE_URL = 'http://localhost:8000';
 const accessToken = () => localStorage.getItem('access_token');
 const refreshToken = () => localStorage.getItem('refresh_token');
 
@@ -70,6 +71,32 @@ async function apiRequest({ url, method = 'GET', headers = {}, params = {}, body
     }
   }
 
+  const responseData = await response.json();
+  return {
+    status: response.status,
+    data: responseData,
+  };
+}
+
+// request form data and files
+async function apiRequestFormData({ url, method = 'POST', headers = {}, params = {}, body = null }) {
+  let fullUrl = url.startsWith('http') ? url : `${API_BASE_URL}${url}`;
+
+  const queryString = new URLSearchParams(params).toString();
+  fullUrl = queryString ? `${fullUrl}?${queryString}` : fullUrl;
+
+  const finalHeaders = {
+    Authorization: `Bearer ${accessToken()}`,
+    ...headers,
+  };
+
+  const options = {
+    method,
+    headers: finalHeaders,
+    body: body,
+  };
+
+  const response = await fetch(fullUrl, options);
   const responseData = await response.json();
   return {
     status: response.status,

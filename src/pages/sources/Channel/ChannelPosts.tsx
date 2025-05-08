@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import apiRequest from "../../requests";
+import apiRequest from "../../../requests";
 import { useParams } from 'react-router-dom';
 import ChannelEditPostModal from "./ChannelEditPostModal";
 import ChannelNewPostModal from "./ChannelNewPostModal";
