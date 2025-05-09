@@ -53,8 +53,6 @@ function ChannelAiConfig(props) {
             });
     }
 
-    console.log(error)
-
     return <>
 
         <div className="toast toast-top toast-end">

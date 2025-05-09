@@ -5,6 +5,7 @@ import ChannelSettings from "./sources/Channel/ChannelSettings";
 import ChannelPosts from "./sources/Channel/ChannelPosts";
 import ChannelLogs from "./sources/Channel/ChannelLogs";
 import ChannelKBs from "./sources/Channel/ChannelKBs";
+import ChannelScheduler from "./sources/Channel/ChannelScheduler";
 
 
 function Channel( ) {
@@ -14,6 +15,7 @@ function Channel( ) {
         { name: "Details", active: true },
         { name: "Posts", active: false },
         { name: "Knowledge Base", active: false },
+        { name: "Scheduler", active: false },
         { name: "Settings", active: false },
         { name: "Logs", active: false },
     ]);
@@ -135,6 +137,12 @@ function Channel( ) {
                         <div className={"p-4 bg-base-200"}>
                             <h2 className="text-xl font-bold">Posts</h2>
                             <ChannelPosts/>
+                        </div>
+                    )}
+                    {tab.name === "Scheduler" && (
+                        <div className={"p-4 bg-base-200"}>
+                            <h2 className="text-xl font-bold">Scheduler</h2>
+                            <ChannelScheduler/>
                         </div>
                     )}
                     {tab.name === "Knowledge Base" && (
