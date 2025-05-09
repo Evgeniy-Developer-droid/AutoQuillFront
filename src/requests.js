@@ -79,7 +79,7 @@ async function apiRequest({ url, method = 'GET', headers = {}, params = {}, body
 }
 
 // request form data and files
-async function apiRequestFormData({ url, method = 'POST', headers = {}, params = {}, body = null }) {
+export async function apiRequestFormData({ url, method = 'POST', headers = {}, params = {}, body = null }) {
   let fullUrl = url.startsWith('http') ? url : `${API_BASE_URL}${url}`;
 
   const queryString = new URLSearchParams(params).toString();

@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import apiRequest from "../../../requests";
+import apiRequest, {apiRequestFormData} from "../../../requests";
 import {useParams} from "react-router-dom";
 import {kbIcons} from "../../tools";
 
@@ -13,7 +13,12 @@ function ChannelKBs(props) {
     const [targetKbId, setTargetKbId] = useState(null);
     const [successSentToast, setSuccessSentToast] = useState(false);
     const [deleteModal, setDeleteModal] = useState(false);
+    const [createModal, setCreateModal] = useState(false);
     const [toastMessage, setToastMessage] = useState("");
+
+    const [createType, setCreateType] = useState("file");
+    const [createFile, setCreateFile] = useState(null);
+    const [createDocument, setCreateDocument] = useState(null);
 
     const getKbs = () => {
         apiRequest({
@@ -57,9 +62,71 @@ function ChannelKBs(props) {
             });
     }
 
+    const CreateKbFile = () => {
+        const formData = new FormData();
+        formData.append("file", createFile);
+        apiRequestFormData({
+            url: `/api/v1/ai/files`,
+            method: "POST",
+            body: formData,
+            params: {
+                channel_id: channelId,
+            }
+        })
+            .then((response) => {
+                setToastMessage(response.data.message);
+                setSuccessSentToast(true);
+                setCreateModal(false);
+                getKbs();
+                setError("");
+            })
+            .catch((error) => {
+                setError("Failed to create kb");
+                console.error(error);
+            });
+    }
+
+    const CreateKbDocument = () => {
+        apiRequest({
+            url: `/api/v1/ai/documents`,
+            method: "POST",
+            params: {
+                channel_id: channelId,
+            },
+            body: {
+                text: createDocument,
+            }
+        })
+            .then((response) => {
+                setToastMessage(response.data.message);
+                setSuccessSentToast(true);
+                setCreateModal(false);
+                getKbs();
+                setError("");
+            })
+            .catch((error) => {
+                setError("Failed to create kb");
+                console.error(error);
+            });
+    }
+
     useEffect(() => {
         getKbs();
     }, []);
+
+    useEffect(() => {
+        if(!page || !limit) return;
+        getKbs();
+    }, [page, limit]);
+
+    useEffect(() => {
+        if (!successSentToast){
+            const timeout = setTimeout(() => {
+                setSuccessSentToast(false);
+                clearTimeout(timeout);
+            }, 3000);
+        }
+    }, [successSentToast]);
 
 
 
@@ -72,6 +139,50 @@ function ChannelKBs(props) {
                 </div>
             </div>}
         </div>
+
+        {createModal && <div className="modal modal-open">
+            <div className="modal-box">
+                <h2 className="text-xl font-bold">Create Knowledge Base</h2>
+                <div className="form-control">
+                    <label className="label cursor-pointer m-2">
+                        <span className="label-text">File</span>
+                        <input type="radio" name="createType" value="file" checked={createType === "file"} onChange={() => setCreateType("file")} className="radio" />
+                    </label>
+                    <label className="label cursor-pointer m-2">
+                        <span className="label-text">Document</span>
+                        <input type="radio" name="createType" value="document" checked={createType === "document"} onChange={() => setCreateType("document")} className="radio" />
+                    </label>
+                    {createType === "file" && <div className={"flex flex-col items-center"}>
+                        <input type="file" onChange={(e) => {
+                            if (e.target.files && e.target.files.length > 0) {
+                                setCreateFile(e.target.files[0]);
+                            }
+                        }} />
+                        <span className="text-sm text-gray-500">File size limit: 10MB</span>
+                        <span className="text-sm text-gray-500">Supported formats: pdf, txt, md</span>
+                    </div>}
+                    {createType === "document" && <div className={"flex flex-col items-center"}>
+                        <textarea className="textarea textarea-bordered w-full h-32" placeholder="Enter document text" onChange={(e) => {
+                            setCreateDocument(e.target.value);
+                        }}></textarea>
+                        <span className="text-sm text-gray-500">Max 5000 characters</span>
+                    </div>}
+                </div>
+                <div className="modal-action">
+                    <button className="btn btn-primary" onClick={() => {
+                        if (createType === "file") {
+                            CreateKbFile();
+                        } else {
+                            CreateKbDocument();
+                        }
+                    }}>Create</button>
+                    <button className="btn" onClick={() => {
+                        setCreateModal(false);
+                        setTargetKbId(null);
+                    }}>Cancel</button>
+                </div>
+            </div>
+        </div>}
 
         {deleteModal && <div className="modal modal-open">
             <div className="modal-box">
@@ -90,7 +201,11 @@ function ChannelKBs(props) {
         </div>}
 
         <div className="flex justify-between items-center mb-4">
-            <button className="btn btn-primary">Create New Source</button>
+            <button className="btn btn-primary"
+                onClick={() => {
+                    setCreateModal(true);
+                }}
+            >Create New Source</button>
             <button className="btn btn-secondary" onClick={() => {
                 setPage(1);
                 setLimit(10);

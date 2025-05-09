@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import apiRequest from "../../../requests";
 import { useParams } from 'react-router-dom';
+import ChannelAiConfig from "./ChannelAIConfig";
 
 function ChannelSettings({ channel_type }) {
     const { channelId } = useParams();
@@ -102,6 +103,10 @@ function ChannelSettings({ channel_type }) {
                 </label>
             </div>
         }
+        <div className={"mt-3"}></div>
+        <hr/>
+        <div className={"mt-3"}></div>
+        <ChannelAiConfig/>
 
     </>;
 }

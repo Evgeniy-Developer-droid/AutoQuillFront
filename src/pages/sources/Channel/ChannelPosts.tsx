@@ -20,6 +20,10 @@ function ChannelPosts(props) {
 
     const [isDeletingPost, setIsDeletingPost] = useState(false);
     const [successSentToast, setSuccessSentToast] = useState(false);
+    const [toastMessage, setToastMessage] = useState("");
+
+    const [generateAiPostModal, setGenerateAiPostModal] = useState(false);
+    const [generateAiPostTopic, setGenerateAiPostTopic] = useState("");
 
     const getPosts = () => {
         apiRequest({
@@ -38,6 +42,32 @@ function ChannelPosts(props) {
             })
             .catch((error) => {
                 setError("Failed to fetch posts");
+                console.error(error);
+            });
+    }
+
+    const generateAiPost = () => {
+        apiRequest({
+            url: `/api/v1/ai/generate/posts`,
+            method: "POST",
+            body: {
+                topic: generateAiPostTopic,
+            },
+            params: {
+                channel_id: channelId,
+            },
+        })
+            .then((response) => {
+                setToastMessage(response.data.message);
+                setSuccessSentToast(true);
+                setTimeout(() => {
+                    setSuccessSentToast(false);
+                    setToastMessage("")
+                }, 3000);
+                setError("");
+            })
+            .catch((error) => {
+                setError("Failed to generate post");
                 console.error(error);
             });
     }
@@ -109,6 +139,28 @@ function ChannelPosts(props) {
             </div>
         </div>}
 
+        {generateAiPostModal && <div className="modal modal-open">
+            <div className="modal-box">
+                <h2 className="text-xl font-bold">Generate AI Post</h2>
+                <input
+                    type="text"
+                    placeholder="Enter topic"
+                    value={generateAiPostTopic}
+                    onChange={(e) => setGenerateAiPostTopic(e.target.value)}
+                    className="input input-bordered w-full mb-4"
+                />
+                <div className="modal-action">
+                    <button className="btn btn-primary" onClick={() => {
+                        generateAiPost();
+                        setGenerateAiPostModal(false);
+                    }}>Generate</button>
+                    <button className="btn" onClick={() => {
+                        setGenerateAiPostModal(false);
+                    }}>Cancel</button>
+                </div>
+            </div>
+        </div>}
+
         {isEditingPost && <ChannelEditPostModal postId={targetPostId} closeModal={() => {
             setIsEditingPost(false);
             setTargetPostId(null);
@@ -119,7 +171,10 @@ function ChannelPosts(props) {
         }} />}
 
         <div className="flex justify-between items-center mb-4">
-            <button className="btn btn-primary" onClick={() => setNewPostModal(true)}>Create New Post</button>
+            <div className={"flex items-center"}>
+                <button className="btn btn-primary mr-2" onClick={() => setNewPostModal(true)}>Create New Post</button>
+                <button className="btn btn-primary" onClick={() => setGenerateAiPostModal(true)}>Generate AI Post</button>
+            </div>
             <button className="btn btn-secondary" onClick={() => {
                 setPage(1);
                 setLimit(10);
