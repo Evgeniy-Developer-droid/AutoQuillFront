@@ -58,6 +58,10 @@ function ChannelPosts(props) {
             },
         })
             .then((response) => {
+                if (response.status !== 200) {
+                    setError(response.data.detail);
+                    return;
+                }
                 setToastMessage(response.data.message);
                 setSuccessSentToast(true);
                 setTimeout(() => {
@@ -105,7 +109,7 @@ function ChannelPosts(props) {
         <div className="toast toast-top toast-end">
             {successSentToast && <div className="alert alert-success shadow-sm">
                 <div>
-                    <span>Post sent to publishing queue</span>
+                    <span>{toastMessage}</span>
                 </div>
             </div>}
         </div>
@@ -252,7 +256,11 @@ function ChannelPosts(props) {
                                         url: `/api/v1/posts/${post.id}/send`,
                                         method: "POST",
                                     })
-                                        .then(() => {
+                                        .then((response) => {
+                                            if (response.status !== 200) {
+                                                setError(response.data.detail);
+                                                return;
+                                            }
                                             setSuccessSentToast(true);
                                             setTimeout(() => {
                                                 setSuccessSentToast(false);

@@ -12,8 +12,7 @@ function Channel( ) {
     const { channelId } = useParams();
     const [error, setError] = useState("");
     const [tabs, setTabs] = useState([
-        { name: "Details", active: true },
-        { name: "Posts", active: false },
+        { name: "Posts", active: true },
         { name: "Knowledge Base", active: false },
         { name: "Scheduler", active: false },
         { name: "Settings", active: false },
@@ -35,22 +34,6 @@ function Channel( ) {
             })
             .catch((error) => {
                 setError("Failed to fetch channel");
-                console.error(error);
-            });
-    }
-
-    const updateChannel = (data) => {
-        apiRequest({
-            url: `/api/v1/channels/${channelId}`,
-            method: "PUT",
-            body: data,
-        })
-            .then((response) => {
-                setChannel(response.data);
-                setError("");
-            })
-            .catch((error) => {
-                setError("Failed to update channel");
                 console.error(error);
             });
     }
@@ -117,22 +100,7 @@ function Channel( ) {
         {
             tabs.map((tab, index) => (
                 <div key={index} className={`tab-content ${tab.active ? "block" : "hidden"}`}>
-                    {tab.name === "Details" && channel && (
-                        <div className={"p-4 bg-base-200"}>
-                            <label htmlFor={"channel-name"} className="label">
-                                <span className="label-text">Channel Name</span>
-                            </label>
-                            <input type={"text"} className={"input input-bordered w-full mb-4 text-xl"} placeholder={"Channel Name"} value={channel.name}
-                               // on focus out update channel name
-                            onBlur={() => {
-                                updateChannel({ name: channel.name });
-                            }}
-                                   onChange={(e) => {
-                                        setChannel({ ...channel, name: e.target.value });
-                                   }}
-                            />
-                        </div>
-                    )}
+
                     {tab.name === "Posts" && (
                         <div className={"p-4 bg-base-200"}>
                             <h2 className="text-xl font-bold">Posts</h2>

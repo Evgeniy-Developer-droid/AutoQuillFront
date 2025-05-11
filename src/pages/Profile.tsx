@@ -37,7 +37,7 @@ function Profile() {
             <div className="card-body">
                 <h2 className="card-title text-2xl">{user.full_name}</h2>
                 <p className={"text-xl"}>{user.email}</p>
-                <p className={"text-xl"}>Last login: {user.last_login}</p>
+                <p className={"text-xl"}>Last login: {new Date(user.last_login).toLocaleString()}</p>
                 <p className={"text-xl"}>Role: {user.role}</p>
             </div>
         </div>

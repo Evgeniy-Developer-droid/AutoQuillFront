@@ -15,7 +15,6 @@ const Base = ({content: Content}) => (
           <li><a className={"text-xl"} href={"/dashboard"}>Dashboard</a></li>
           <li><a className={"text-xl"} href={"/dashboard/profile"}>Profile</a></li>
           <li><a className={"text-xl"} href={"/dashboard/channels"}>Channels</a></li>
-          <li><a className={"text-xl"} href={"/dashboard/posts"}>Posts</a></li>
             <div className="absolute bottom-0 left-0 p-5 w-full">
                 <button className={"logout btn btn-primary w-full"} onClick={() => {
                     localStorage.removeItem("access_token");

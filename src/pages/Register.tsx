@@ -10,6 +10,7 @@ function Register() {
         full_name: "",
         confirm_password: "",
     });
+    const [referralCode, setReferralCode] = useState("");
     const [error, setError] = useState("");
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -18,20 +19,25 @@ function Register() {
             setError("Passwords do not match");
             return;
         }
+        const params = {}
+        if (referralCode) {
+            params.referral_code = referralCode;
+        }
         apiRequest({
             url: "/api/v1/auth/register",
             method: "POST",
             body: {
                 email: data.email,
                 password: data.password,
-                full_name: data.full_name
+                full_name: data.full_name,
+                timezone: Intl.DateTimeFormat().resolvedOptions().timeZone
             },
+            params: params
         }).then(
             (response) => {
                 if (response.status === 200) {
                     window.location.href = "/login?status=registered";
                 } else {
-                    console.log(response);
                     setError(response.data.detail);
                 }
             }
@@ -74,6 +80,13 @@ function Register() {
             <input type="password" className="input" placeholder="********"
                 value={data.confirm_password}
                 onChange={(e) => setData({ ...data, confirm_password: e.target.value })}
+            />
+          </fieldset>
+          <fieldset className="fieldset">
+            <legend className="fieldset-legend">Referral Code (optional)</legend>
+            <input type="text" className="input" placeholder="Referral Code"
+                value={referralCode}
+                onChange={(e) => setReferralCode(e.target.value)}
             />
           </fieldset>
           <div className="card-actions">
