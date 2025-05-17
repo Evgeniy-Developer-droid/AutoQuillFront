@@ -10,6 +10,7 @@ import Base from "./pages/base";
 import Profile from "./pages/Profile";
 import Channels from "./pages/Channels";
 import Channel from "./pages/Channel";
+import Subscription from "./pages/Subscription.js";
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -20,6 +21,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Base content={Dashboard} />} />
         <Route path="/dashboard/profile" element={<Base content={Profile} />} />
+        <Route path="/dashboard/subscription" element={<Base content={Subscription} />} />
         <Route path="/dashboard/channels" element={<Base content={Channels} />} />
         <Route path="/dashboard/channels/:channelId" element={<Base content={Channel} />} />
       </Routes>
