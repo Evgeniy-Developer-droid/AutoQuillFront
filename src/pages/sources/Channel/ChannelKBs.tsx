@@ -19,6 +19,7 @@ function ChannelKBs(props) {
     const [createType, setCreateType] = useState("file");
     const [createFile, setCreateFile] = useState(null);
     const [createDocument, setCreateDocument] = useState(null);
+    const [documentTitle, setDocumentTitle] = useState(null);
 
     const getKbs = () => {
         apiRequest({
@@ -95,6 +96,7 @@ function ChannelKBs(props) {
             },
             body: {
                 text: createDocument,
+                title: documentTitle,
             }
         })
             .then((response) => {
@@ -162,6 +164,9 @@ function ChannelKBs(props) {
                         <span className="text-sm text-gray-500">Supported formats: pdf, txt, md</span>
                     </div>}
                     {createType === "document" && <div className={"flex flex-col items-center"}>
+                        <input type="text" placeholder="Document Title" className="input input-bordered w-full mb-2" onChange={(e) => {
+                            setDocumentTitle(e.target.value);
+                        }} />
                         <textarea className="textarea textarea-bordered w-full h-32" placeholder="Enter document text" onChange={(e) => {
                             setCreateDocument(e.target.value);
                         }}></textarea>
