@@ -5,24 +5,23 @@ const Landing = () => (
     <div className="bg-white text-gray-900">
       {/* Navbar */}
       <nav className="flex items-center justify-between p-6 shadow-md bg-white sticky top-0 z-50">
-        <div className="text-2xl font-bold text-blue-600">AutoQuill</div>
+        <div className="text-2xl font-bold text-gray-700">AutoQuill</div>
         <div className="space-x-4">
           <a href="#how-it-works" className="text-gray-700 hover:text-blue-600">Як це працює</a>
           <a href="#integrations" className="text-gray-700 hover:text-blue-600">Інтеграції</a>
           <a href="#use-cases" className="text-gray-700 hover:text-blue-600">Використання</a>
           <a href="#pricing" className="text-gray-700 hover:text-blue-600">Тарифи</a>
           <a href="#faq" className="text-gray-700 hover:text-blue-600">FAQ</a>
-          <button className="bg-blue-600 text-white hover:bg-blue-700">Увійти</button>
+          <a href={"/login"} className="btn bg-blue-400 text-white hover:bg-blue-700">Увійти</a>
         </div>
       </nav>
 
       {/* Hero */}
-      <section className="min-h-screen flex flex-col items-center justify-center text-center p-6 bg-gradient-to-br from-blue-500 to-purple-600 text-white">
+      <section className="min-h-screen flex flex-col items-center justify-center text-center p-6 bg-gradient-to-br from-blue-100 to-purple-300 text-black">
         <h1 className="text-4xl md:text-6xl font-bold mb-4">Перетвори документи на контент за секунди</h1>
         <p className="text-xl md:text-2xl mb-6 max-w-2xl">AI-сервіс для створення унікальних статей, постів і звітів з PDF, DOCX та інших файлів</p>
         <div className="flex gap-4">
-          <button className="bg-white text-blue-600 hover:bg-gray-100">Спробувати безкоштовно</button>
-          <button className="border-white text-white">Дивитись демо</button>
+          <a href={"/register"} className="btn bg-white text-black hover:bg-gray-100">Спробувати безкоштовно</a>
         </div>
       </section>
 
@@ -93,17 +92,20 @@ const Landing = () => (
         <h2 className="text-3xl font-bold mb-10">Тарифи</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-6xl mx-auto">
           {[{
-            title: "Безкоштовно",
-            price: "0₴",
-            features: ["3 генерації", "1 інтеграція", "Обмежений функціонал"]
+            title: "Free",
+            code: "FREE",
+            price: "0$",
+            features: ["10 генерацій/міс", "10 публікацій/міс", "Доступні інтеграції", "База знань", "Планові публікації (обмежено)"]
+          }, {
+            title: "Start",
+            code: "START",
+            price: "10$ / міс",
+            features: ["100 генерацій/міс", "100 публікацій/міс", "Доступні інтеграції", "База знань", "Планові публікації"]
           }, {
             title: "Pro",
-            price: "249₴ / міс",
-            features: ["500 генерацій/міс", "Усі інтеграції", "Підтримка"]
-          }, {
-            title: "Команда",
-            price: "Індивідуально",
-            features: ["Без обмежень", "Командний доступ", "Розширене API"]
+            code: "PRO",
+            price: "20$ / міс",
+            features: ["300 генерацій/міс", "300 публікацій/міс", "Доступні інтеграції", "База знань", "Планові публікації"]
           }].map((plan, i) => (
             <div key={i} className="bg-white p-6 rounded-2xl shadow text-left">
               <h3 className="text-xl font-bold mb-2">{plan.title}</h3>
@@ -111,7 +113,7 @@ const Landing = () => (
               <ul className="space-y-2 mb-4">
                 {plan.features.map((f, idx) => <li key={idx}>• {f}</li>)}
               </ul>
-              <button className="bg-blue-600 text-white w-full">Обрати</button>
+              <a href={"/register"} className="btn bg-blue-600 text-white w-full">Обрати</a>
             </div>
           ))}
         </div>
@@ -134,7 +136,7 @@ const Landing = () => (
       <section className="py-20 px-6 bg-blue-600 text-white text-center">
         <h2 className="text-3xl font-bold mb-6">Готовий спробувати?</h2>
         <p className="text-lg mb-6">Завантаж свій файл і створи унікальний AI-контент вже зараз</p>
-        <button className="bg-white text-blue-600 hover:bg-gray-100">Почати безкоштовно</button>
+        <a href={"/register"} className="btn bg-white text-blue-600 hover:bg-gray-100">Почати безкоштовно</a>
       </section>
 
       {/* FAQ */}
@@ -148,11 +150,20 @@ const Landing = () => (
             q: "Чи мій текст буде унікальним?",
             a: "Так, ми генеруємо унікальний контент за допомогою ШІ."
           }, {
-            q: "Чи зберігаєте ви мій контент?",
-            a: "Ні, ми не зберігаємо файли або тексти без вашої згоди."
+            q: "Куди можна публікувати контент?",
+            a: "Ми підтримуємо автопостинг у Telegram, Discord, а також на сайти через API."
           }, {
-            q: "Чи можна використовувати API?",
-            a: "Так, доступне кастомне API у платних тарифах."
+            q: "Чи можна налаштувати розклад публікацій?",
+            a: "Так, ви можете створити пости з точним розкладом за днями та годинами."
+          }, {
+            q: "Чи можна редагувати згенерований текст перед публікацією?",
+            a: "Звісно! Після генерації ви можете відредагувати текст вручну."
+          }, {
+            q: "Чи зберігаються мої файли та пости?",
+            a: "Ваші файли зберігаються у безпечному середовищі. Ви завжди можете переглянути історію постів та завантажених документів."
+          }, {
+            q: "Як працює генерація контенту?",
+            a: "Ви завантажуєте документ або пишете опис, а ШІ створює текст, який підходить під вибраний канал публікації."
           }].map((faq, i) => (
             <div key={i}>
               <h3 className="font-semibold text-lg">{faq.q}</h3>
