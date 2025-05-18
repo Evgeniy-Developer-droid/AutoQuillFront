@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import apiRequest from "../requests";
 import ChannelNewModal from "./sources/Channel/ChannelNewModal";
 
 
 function Channels() {
+    const { t } = useTranslation();
     const [page, setPage] = useState(1);
     const [limit, setLimit] = useState(10);
     const [total, setTotal] = useState(0);
@@ -29,7 +31,7 @@ function Channels() {
                 setError("");
             })
             .catch((error) => {
-                setError("Failed to fetch channels");
+                setError(t("Failed to fetch channels"));
                 console.error(error);
             });
     }
@@ -52,7 +54,7 @@ function Channels() {
     return <>
             {error && <div className="alert alert-error shadow-sm">
                 <div>
-                    <span>{error}</span>
+                    <span>{t(error)}</span>
                 </div>
             </div>}
 
@@ -60,8 +62,8 @@ function Channels() {
 
         { showDeleteModal && <div className="modal modal-open">
             <div className="modal-box">
-                <h2 className="font-bold text-lg">Delete Channel</h2>
-                <p>Are you sure you want to delete this channel?</p>
+                <h2 className="font-bold text-lg">{t("Delete Channel")}</h2>
+                <p>{t("Are you sure you want to delete this channel?")}</p>
                 <div className="modal-action">
                     <button className="btn btn-primary" onClick={() => {
                         apiRequest({
@@ -75,24 +77,24 @@ function Channels() {
                                 getChannels();
                             })
                             .catch((error) => {
-                                setError("Failed to delete channel");
+                                setError(t("Failed to delete channel"));
                                 console.error(error);
                             });
-                    }}>Yes</button>
-                    <button className="btn" onClick={() => setShowDeleteModal(false)}>No</button>
+                    }}>{t("Yes")}</button>
+                    <button className="btn" onClick={() => setShowDeleteModal(false)}>{t("No")}</button>
                 </div>
             </div>
         </div>}
 
         <div className="flex justify-start items-center mb-4">
-            <h1 className="text-2xl font-bold mr-2">Channels</h1>
+            <h1 className="text-2xl font-bold mr-2">{t("Channels")}</h1>
             <button className="btn btn-primary" onClick={() => setShowNewChannelModal(true)}>
-                Create New Channel
+                {t("Create New Channel")}
             </button>
         </div>
         <div className="flex justify-end mb-4">
             <div className="flex items-center mr-2">
-                <label htmlFor="limit" className="mr-2">Limit:</label>
+                <label htmlFor="limit" className="mr-2">{t("Limit")}:</label>
                 <select
                     id="limit"
                     value={limit}
@@ -105,7 +107,7 @@ function Channels() {
                 </select>
             </div>
             <div className="flex items-center">
-                <label htmlFor="page" className="mr-2">Page:</label>
+                <label htmlFor="page" className="mr-2">{t("Page")}:</label>
                 <input
                     type="number"
                     id="page"
@@ -123,10 +125,10 @@ function Channels() {
                     <table className="table w-full">
                         <thead>
                             <tr>
-                                <th>Channel Name</th>
-                                <th>Channel Type</th>
-                                <th>Created At</th>
-                                <th>Actions</th>
+                                <th>{t("Channel Name")}</th>
+                                <th>{t("Channel Type")}</th>
+                                <th>{t("Created At")}</th>
+                                <th>{t("Actions")}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -144,7 +146,7 @@ function Channels() {
                                             setTargetChannel(channel.id);
                                             setShowDeleteModal(true);
                                         }}>
-                                            Delete
+                                            {t("Delete")}
                                         </button>
                                     </td>
                                 </tr>
@@ -154,7 +156,7 @@ function Channels() {
                 </div>
             ) : (
                 <div className="alert alert-info shadow-sm">
-                    No channels found.
+                    {t("No channels found.")}
                 </div>
             )
         }

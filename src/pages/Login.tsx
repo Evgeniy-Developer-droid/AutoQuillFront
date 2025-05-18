@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import apiRequest from "../requests";
 
 function Login() {
-
+    const { t } = useTranslation();
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -38,7 +39,7 @@ function Login() {
                     window.location.href = "/dashboard";
                 } else {
                   console.log(response);
-                    setError(response.data.detail);
+                    setError(t(response.data.detail));
                 }
             }
         )
@@ -49,26 +50,26 @@ function Login() {
     <div className={"flex flex-col items-center justify-center h-screen bg-base-200"}>
       <div className="card bg-base-100 w-96 shadow-sm">
         <div className="card-body">
-          <h2 className="card-title">Sign In</h2>
+          <h2 className="card-title">{t("Sign In")}</h2>
           {error && <div className="alert alert-error shadow-sm">
             <div>
-              <span>{error}</span>
+              <span>{t(error)}</span>
             </div>
             </div>}
             {registered && <div className="alert alert-success shadow-sm">
             <div>
-              <span>Account created successfully, please sign in</span>
+              <span>{t("Account created successfully, please sign in")}</span>
             </div>
             </div>}
           <fieldset className="fieldset">
-            <legend className="fieldset-legend">Email</legend>
+            <legend className="fieldset-legend">{t("Email")}</legend>
             <input type="email" className="input" placeholder="user@email.com"
                 value={data.email}
                 onChange={(e) => setData({ ...data, email: e.target.value })}
             />
           </fieldset>
           <fieldset className="fieldset">
-            <legend className="fieldset-legend">Password</legend>
+            <legend className="fieldset-legend">{t("Password")}</legend>
             <input type="password" className="input" placeholder="********"
                 value={data.password}
                 onChange={(e) => setData({ ...data, password: e.target.value })}
@@ -77,9 +78,9 @@ function Login() {
           <div className="card-actions">
             <button className="btn btn-primary"
                 onClick={handleSubmit}
-            >Sign in</button>
+            >{t("Sign In")}</button>
             <p className="text-sm text-center">
-              Don't have an account? <a href="/register" className="link">Sign up</a>
+              {t("Don't have an account?")} <a href="/register" className="link">{t("Sign Up")}</a>
             </p>
           </div>
         </div>

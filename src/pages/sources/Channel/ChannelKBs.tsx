@@ -1,9 +1,11 @@
 import {useEffect, useState} from 'react';
+import {useTranslation} from "react-i18next";
 import apiRequest, {apiRequestFormData} from "../../../requests";
 import {useParams} from "react-router-dom";
 import {kbIcons} from "../../tools";
 
 function ChannelKBs(props) {
+    const {t} = useTranslation();
     const { channelId } = useParams();
     const [error, setError] = useState("");
     const [kbs, setKbs] = useState([]);
@@ -37,7 +39,7 @@ function ChannelKBs(props) {
                 setError("");
             })
             .catch((error) => {
-                setError("Failed to fetch kbs");
+                setError(t("Failed to fetch knowledge bases"));
                 console.error(error);
             });
     }
@@ -58,7 +60,7 @@ function ChannelKBs(props) {
                 setError("");
             })
             .catch((error) => {
-                setError("Failed to delete kb");
+                setError(t("Failed to delete knowledge base"));
                 console.error(error);
             });
     }
@@ -82,7 +84,7 @@ function ChannelKBs(props) {
                 setError("");
             })
             .catch((error) => {
-                setError("Failed to create kb");
+                setError(t("Failed to create knowledge base"));
                 console.error(error);
             });
     }
@@ -107,7 +109,7 @@ function ChannelKBs(props) {
                 setError("");
             })
             .catch((error) => {
-                setError("Failed to create kb");
+                setError(t("Failed to create knowledge base"));
                 console.error(error);
             });
     }
@@ -144,14 +146,14 @@ function ChannelKBs(props) {
 
         {createModal && <div className="modal modal-open">
             <div className="modal-box">
-                <h2 className="text-xl font-bold">Create Knowledge Base</h2>
+                <h2 className="text-xl font-bold">{t("Create Knowledge Base")}</h2>
                 <div className="form-control">
                     <label className="label cursor-pointer m-2">
-                        <span className="label-text">File</span>
+                        <span className="label-text">{t("File")}</span>
                         <input type="radio" name="createType" value="file" checked={createType === "file"} onChange={() => setCreateType("file")} className="radio" />
                     </label>
                     <label className="label cursor-pointer m-2">
-                        <span className="label-text">Document</span>
+                        <span className="label-text">{t("Document")}</span>
                         <input type="radio" name="createType" value="document" checked={createType === "document"} onChange={() => setCreateType("document")} className="radio" />
                     </label>
                     {createType === "file" && <div className={"flex flex-col items-center"}>
@@ -160,8 +162,8 @@ function ChannelKBs(props) {
                                 setCreateFile(e.target.files[0]);
                             }
                         }} />
-                        <span className="text-sm text-gray-500">File size limit: 10MB</span>
-                        <span className="text-sm text-gray-500">Supported formats: pdf, txt, md</span>
+                        <span className="text-sm text-gray-500">{t("File size limit")}: 10MB</span>
+                        <span className="text-sm text-gray-500">{t("Supported formats")}: pdf, txt, md</span>
                     </div>}
                     {createType === "document" && <div className={"flex flex-col items-center"}>
                         <input type="text" placeholder="Document Title" className="input input-bordered w-full mb-2" onChange={(e) => {
@@ -170,7 +172,7 @@ function ChannelKBs(props) {
                         <textarea className="textarea textarea-bordered w-full h-32" placeholder="Enter document text" onChange={(e) => {
                             setCreateDocument(e.target.value);
                         }}></textarea>
-                        <span className="text-sm text-gray-500">Max 5000 characters</span>
+                        <span className="text-sm text-gray-500">{t("Max 5000 characters")}</span>
                     </div>}
                 </div>
                 <div className="modal-action">
@@ -180,27 +182,27 @@ function ChannelKBs(props) {
                         } else {
                             CreateKbDocument();
                         }
-                    }}>Create</button>
+                    }}>{t("Create")}</button>
                     <button className="btn" onClick={() => {
                         setCreateModal(false);
                         setTargetKbId(null);
-                    }}>Cancel</button>
+                    }}>{t("Cancel")}</button>
                 </div>
             </div>
         </div>}
 
         {deleteModal && <div className="modal modal-open">
             <div className="modal-box">
-                <h2 className="text-xl font-bold">Delete Knowledge Base</h2>
-                <p>Are you sure you want to delete this knowledge base?</p>
+                <h2 className="text-xl font-bold">{t("Delete Knowledge Base")}</h2>
+                <p>{t("Are you sure you want to delete this knowledge base?")}</p>
                 <div className="modal-action">
                     <button className="btn btn-primary" onClick={() => {
                         deleteKb();
-                    }}>Delete</button>
+                    }}>{t("Delete")}</button>
                     <button className="btn" onClick={() => {
                         setDeleteModal(false);
                         setTargetKbId(null);
-                    }}>Cancel</button>
+                    }}>{t("Cancel")}</button>
                 </div>
             </div>
         </div>}
@@ -210,16 +212,16 @@ function ChannelKBs(props) {
                 onClick={() => {
                     setCreateModal(true);
                 }}
-            >Create New Source</button>
+            >{t("Create New Source")}</button>
             <button className="btn btn-secondary" onClick={() => {
                 setPage(1);
                 setLimit(10);
-            }}>Reset Filters</button>
+            }}>{t("Reset Filters")}</button>
         </div>
 
         <div className="flex justify-between items-center mb-4">
             <div className="flex items-center">
-                <label htmlFor="limit" className="mr-2">Limit:</label>
+                <label htmlFor="limit" className="mr-2">{t("Limit")}:</label>
                 <select
                     id="limit"
                     value={limit}
@@ -232,7 +234,7 @@ function ChannelKBs(props) {
                 </select>
             </div>
             <div className="flex items-center">
-                <label htmlFor="page" className="mr-2">Page:</label>
+                <label htmlFor="page" className="mr-2">{t("Page")}:</label>
                 <input
                     type="number"
                     id="page"
@@ -255,8 +257,8 @@ function ChannelKBs(props) {
             <table className="table w-full">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Actions</th>
+                        <th>{t("Name")}</th>
+                        <th>{t("Actions")}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -275,7 +277,7 @@ function ChannelKBs(props) {
                                 <button className="btn btn-secondary btn-xs m-1" onClick={() => {
                                     setTargetKbId(kb.id);
                                     setDeleteModal(true);
-                                }}>Delete</button>
+                                }}>{t("Delete")}</button>
                             </td>
                         </tr>
                     ))}

@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import apiRequest from "../requests";
 
 
 function Profile() {
+    const { t } = useTranslation();
     const [user, setUser] = useState({
         email: "",
         full_name: "",
@@ -21,7 +23,7 @@ function Profile() {
                 if (response.status === 200) {
                     setUser(response.data);
                 } else {
-                    setError(response.data.detail);
+                    setError(t(response.data.detail));
                 }
             }
         )
@@ -30,15 +32,15 @@ function Profile() {
     return <>
             {error && <div className="alert alert-error shadow-sm">
                 <div>
-                    <span>{error}</span>
+                    <span>{t(error)}</span>
                 </div>
             </div>}
         <div className="card bg-base-200 shadow-sm">
             <div className="card-body">
                 <h2 className="card-title text-2xl">{user.full_name}</h2>
                 <p className={"text-xl"}>{user.email}</p>
-                <p className={"text-xl"}>Last login: {new Date(user.last_login).toLocaleString()}</p>
-                <p className={"text-xl"}>Role: {user.role}</p>
+                <p className={"text-xl"}>{t("Last login")}: {new Date(user.last_login).toLocaleString()}</p>
+                <p className={"text-xl"}>{t("Role")}: {user.role}</p>
             </div>
         </div>
     </>

@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import apiRequest from "../../../requests";
 import { useParams } from 'react-router-dom';
 
 
 function ChannelLogs() {
+    const { t } = useTranslation();
     const { channelId } = useParams();
     const [error, setError] = useState("");
     const [logs, setLogs] = useState([]);
@@ -28,7 +30,7 @@ function ChannelLogs() {
                 setError("");
             })
             .catch((error) => {
-                setError("Failed to fetch logs");
+                setError(t("Failed to fetch logs"));
                 console.error(error);
             });
     }
@@ -45,7 +47,7 @@ function ChannelLogs() {
         </div>}
         <div className="flex justify-between items-center mt-4">
             <div className="flex items-center">
-                <label htmlFor="limit" className="mr-2">Limit:</label>
+                <label htmlFor="limit" className="mr-2">{t("Limit")}:</label>
                 <select
                     id="limit"
                     value={limit}
@@ -57,15 +59,15 @@ function ChannelLogs() {
                     ))}
                 </select>
             </div>
-            <button className="btn btn-primary ml-4" onClick={getLogs}>Refresh</button>
+            <button className="btn btn-primary ml-4" onClick={getLogs}>{t("Refresh")}</button>
         </div>
         <div className="overflow-x-auto">
             <table className="table w-full">
                 <thead>
                     <tr>
-                        <th>Time</th>
-                        <th>Post</th>
-                        <th>Message</th>
+                        <th>{t("Time")}</th>
+                        <th>{t("Post")}</th>
+                        <th>{t("Message")}</th>
                     </tr>
                 </thead>
                 <tbody>

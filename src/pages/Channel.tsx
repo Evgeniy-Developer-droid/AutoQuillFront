@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import apiRequest from "../requests";
 import { useParams } from 'react-router-dom';
 import ChannelSettings from "./sources/Channel/ChannelSettings";
@@ -9,6 +10,7 @@ import ChannelScheduler from "./sources/Channel/ChannelScheduler";
 
 
 function Channel( ) {
+    const { t } = useTranslation();
     const { channelId } = useParams();
     const [error, setError] = useState("");
     const [tabs, setTabs] = useState([
@@ -33,7 +35,7 @@ function Channel( ) {
                 setError("");
             })
             .catch((error) => {
-                setError("Failed to fetch channel");
+                setError(t("Failed to fetch channel"));
                 console.error(error);
             });
     }
@@ -46,8 +48,8 @@ function Channel( ) {
 
             {deleteModal && <div className="modal modal-open">
                 <div className="modal-box">
-                    <h2 className="text-xl font-bold">Delete Channel</h2>
-                    <p>Are you sure you want to delete this channel?</p>
+                    <h2 className="text-xl font-bold">{t("Delete Channel")}</h2>
+                    <p>{t("Are you sure you want to delete this channel?")}</p>
                     <div className="modal-action">
                         <button className="btn btn-primary" onClick={() => {
                             apiRequest({
@@ -59,11 +61,11 @@ function Channel( ) {
                                     window.location.href = "/dashboard/channels";
                                 })
                                 .catch((error) => {
-                                    setError("Failed to delete channel");
+                                    setError(t("Failed to delete channel"));
                                     console.error(error);
                                 });
-                        }}>Delete</button>
-                        <button className="btn" onClick={() => setDeleteModal(false)}>Cancel</button>
+                        }}>{t("Delete")}</button>
+                        <button className="btn" onClick={() => setDeleteModal(false)}>{t("Cancel")}</button>
                     </div>
                 </div>
                 <div className="modal-backdrop" onClick={() => setDeleteModal(false)}></div>
@@ -71,18 +73,18 @@ function Channel( ) {
 
             {error && <div className="alert alert-error shadow-sm">
                 <div>
-                    <span>{error}</span>
+                    <span>{t(error)}</span>
                 </div>
             </div>}
 
             <div className="flex justify-between items-center mb-4">
-                <h1 className="text-2xl font-bold">Channel</h1>
+                <h1 className="text-2xl font-bold">{t("Channel")}</h1>
                 <div className="flex items-center">
                     <button className="btn btn-secondary"
                         onClick={() => {
                             setDeleteModal(true);
                         }}
-                    >Delete</button>
+                    >{t("Delete")}</button>
                 </div>
             </div>
 
@@ -92,7 +94,7 @@ function Channel( ) {
                 <a key={index} className={`tab  text-xl ${tab.active ? "tab-active" : ""}`} onClick={() => {
                     setTabs(tabs.map((t, i) => ({ ...t, active: i === index })));
                 }}>
-                    {tab.name}
+                    {t(tab.name)}
                 </a>
             ))}
         </div>
@@ -103,25 +105,25 @@ function Channel( ) {
 
                     {tab.name === "Posts" && (
                         <div className={"p-4 bg-base-200"}>
-                            <h2 className="text-xl font-bold">Posts</h2>
+                            <h2 className="text-xl font-bold">{t("Posts")}</h2>
                             <ChannelPosts/>
                         </div>
                     )}
                     {tab.name === "Scheduler" && (
                         <div className={"p-4 bg-base-200"}>
-                            <h2 className="text-xl font-bold">Scheduler</h2>
+                            <h2 className="text-xl font-bold">{t("Scheduler")}</h2>
                             <ChannelScheduler/>
                         </div>
                     )}
                     {tab.name === "Knowledge Base" && (
                         <div className={"p-4 bg-base-200"}>
-                            <h2 className="text-xl font-bold">Knowledge Base</h2>
+                            <h2 className="text-xl font-bold">{t("Knowledge Base")}</h2>
                             <ChannelKBs/>
                         </div>
                     )}
                     {tab.name === "Settings" && (
                         <div className={"p-4 bg-base-200"}>
-                            <h2 className="text-xl font-bold">Settings</h2>
+                            <h2 className="text-xl font-bold">{t("Settings")}</h2>
                             <ChannelSettings
                                 channel_type={channel?.channel_type}
                             />

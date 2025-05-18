@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import apiRequest from "../../../requests";
 import { useParams } from 'react-router-dom';
 import ChannelAiConfig from "./ChannelAIConfig";
 
 function ChannelSettings({ channel_type }) {
+    const { t } = useTranslation();
     const { channelId } = useParams();
     const [error, setError] = useState("");
     const [formConfig, setFormConfig] = useState({});
@@ -20,7 +22,7 @@ function ChannelSettings({ channel_type }) {
                 setError("");
             })
             .catch((error) => {
-                setError("Failed to fetch channel");
+                setError(t("Failed to fetch channel"));
                 console.error(error);
             });
     }, []);
@@ -42,7 +44,7 @@ function ChannelSettings({ channel_type }) {
                 }, 3000);
             })
             .catch((error) => {
-                setError("Failed to update channel");
+                setError(t("Failed to update channel"));
                 console.error(error);
             });
     }
@@ -52,11 +54,11 @@ function ChannelSettings({ channel_type }) {
         <div className="toast toast-top toast-end">
             {successToast && <div className="alert alert-success shadow-sm">
                 <div>
-                    <span>Channel settings updated successfully</span>
+                    <span>{t("Channel settings updated successfully")}</span>
                 </div>
             </div>}
         </div>
-        <h3 className={"font-bold mb-4"}>Channel Type: {channel_type}</h3>
+        <h3 className={"font-bold mb-4"}>{t("Channel Type")}: {channel_type}</h3>
 
         {
             error && <div className="alert alert-error shadow-sm">
@@ -69,8 +71,8 @@ function ChannelSettings({ channel_type }) {
         {
             channel_type === "telegram" && <div className="flex flex-col gap-4">
                 <label className="label">
-                    <span className="label-text">Telegram Bot Token</span>
-                    <input type="text" placeholder="Telegram Bot Token" className="input input-bordered w-full"
+                    <span className="label-text">{t("Telegram Bot Token")}</span>
+                    <input type="text" placeholder={t("Telegram Bot Token")} className="input input-bordered w-full"
                         value={formConfig?.telegram_bot_token}
                         onChange={(e) => {
                             setFormConfig({ ...formConfig, telegram_bot_token: e.target.value });
@@ -79,8 +81,8 @@ function ChannelSettings({ channel_type }) {
                     />
                 </label>
                 <label className="label">
-                    <span className="label-text">Telegram Channel ID</span>
-                    <input type="text" placeholder="Telegram Channel ID" className="input input-bordered w-full"
+                    <span className="label-text">{t("Telegram Channel ID")}</span>
+                    <input type="text" placeholder={t("Telegram Channel ID")} className="input input-bordered w-full"
                         value={formConfig?.telegram_channel_id}
                         onChange={(e) => {
                             setFormConfig({ ...formConfig, telegram_channel_id: e.target.value });
@@ -89,7 +91,7 @@ function ChannelSettings({ channel_type }) {
                     />
                 </label>
                 <label className="label">
-                    <span className="label-text">Telegram Formatting Type</span>
+                    <span className="label-text">{t("Telegram Formatting Type")}</span>
                     <select className="select select-bordered w-full"
                         value={formConfig?.parse_mode}
                         onChange={(e) => {
@@ -97,8 +99,8 @@ function ChannelSettings({ channel_type }) {
                         }}
                         onBlur={updateChannel}
                     >
-                        <option value="markdown">Markdown</option>
-                        <option value="html">HTML</option>
+                        <option value="markdown">{t("Markdown")}</option>
+                        <option value="html">{t("HTML")}</option>
                     </select>
                 </label>
             </div>

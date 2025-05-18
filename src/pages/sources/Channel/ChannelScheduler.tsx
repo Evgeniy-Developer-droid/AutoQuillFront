@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import apiRequest from "../../../requests";
 import { useParams } from 'react-router-dom';
 import {kbIcons} from "../../tools";
 
 function ChannelScheduler(props) {
+    const { t } = useTranslation();
     const { channelId } = useParams();
     const [error, setError] = useState("");
     const [toast, setToast] = useState(false)
@@ -18,13 +20,13 @@ function ChannelScheduler(props) {
     const [createTimes, setCreateTimes] = useState([]);
 
     const weekdays = {
-        0: "Monday",
-        1: "Tuesday",
-        2: "Wednesday",
-        3: "Thursday",
-        4: "Friday",
-        5: "Saturday",
-        6: "Sunday",
+        0: t("Monday"),
+        1: t("Tuesday"),
+        2: t("Wednesday"),
+        3: t("Thursday"),
+        4: t("Friday"),
+        5: t("Saturday"),
+        6: t("Sunday"),
     }
 
     const getSchedules = () => {
@@ -40,7 +42,7 @@ function ChannelScheduler(props) {
                 setError("");
             })
             .catch((error) => {
-                setError("Failed to fetch schedules");
+                setError(t("Failed to fetch schedules"));
                 console.error(error);
             });
     }
@@ -55,7 +57,7 @@ function ChannelScheduler(props) {
         })
             .then((response) => {
                 setToast(true)
-                setToastMessage("Schedule deleted successfully")
+                setToastMessage(t("Schedule deleted successfully"))
                 getSchedules()
                 setError("");
                 setTimeout(() => {
@@ -63,7 +65,7 @@ function ChannelScheduler(props) {
                 }, 3000)
             })
             .catch((error) => {
-                setError("Failed to delete schedule");
+                setError(t("Failed to delete schedule"));
                 console.error(error);
             });
     }
@@ -84,7 +86,7 @@ function ChannelScheduler(props) {
         })
             .then((response) => {
                 setToast(true)
-                setToastMessage("Schedule created successfully")
+                setToastMessage(t("Schedule created successfully"))
                 getSchedules()
                 setError("");
                 setTimeout(() => {
@@ -92,7 +94,7 @@ function ChannelScheduler(props) {
                 }, 3000)
             })
             .catch((error) => {
-                setError("Failed to create schedule");
+                setError(t("Failed to create schedule"));
                 console.error(error);
             });
     }
@@ -109,7 +111,7 @@ function ChannelScheduler(props) {
         })
             .then((response) => {
                 setToast(true)
-                setToastMessage("Schedule updated successfully")
+                setToastMessage(t("Schedule updated successfully"))
                 getSchedules()
                 setError("");
                 setTimeout(() => {
@@ -117,7 +119,7 @@ function ChannelScheduler(props) {
                 }, 3000)
             })
             .catch((error) => {
-                setError("Failed to update schedule");
+                setError(t("Failed to update schedule"));
                 console.error(error);
             });
     }
@@ -146,25 +148,25 @@ function ChannelScheduler(props) {
 
         {deleteModal && <div className="modal modal-open">
             <div className="modal-box">
-                <h2 className="text-xl font-bold">Delete Schedule</h2>
-                <p>Are you sure you want to delete this schedule?</p>
+                <h2 className="text-xl font-bold">{t("Delete Schedule")}</h2>
+                <p>{t("Are you sure you want to delete this schedule?")}</p>
                 <div className="modal-action">
                     <button className="btn btn-primary" onClick={() => {
                         deleteSchedule();
                         setDeleteModal(false);
-                    }}>Delete</button>
-                    <button className="btn" onClick={() => setDeleteModal(false)}>Cancel</button>
+                    }}>{t("Delete")}</button>
+                    <button className="btn" onClick={() => setDeleteModal(false)}>{t("Cancel")}</button>
                 </div>
             </div>
         </div>}
 
         {createModal && <div className="modal modal-open">
             <div className="modal-box">
-                <h2 className="text-xl font-bold">Create Schedule</h2>
+                <h2 className="text-xl font-bold">{t("Create Schedule")}</h2>
                 <form>
                     <div className="form-control">
                         <label className="label">
-                            <span className="label-text">Weekdays</span>
+                            <span className="label-text">{t("Weekdays")}</span>
                         </label>
                         {Object.keys(weekdays).map((key) => (
                             <div key={key} className="flex items-center">
@@ -186,7 +188,7 @@ function ChannelScheduler(props) {
 
                     <div className={"form-control mt-4"}>
                         <label className="label">
-                            <span className="label-text">Times</span>
+                            <span className="label-text">{t("Times")}</span>
                         </label>
                         {createTimes.map((time, index) => (
                             <div key={index} className="flex items-center">
@@ -201,26 +203,26 @@ function ChannelScheduler(props) {
                                     onClick={() => {
                                         setCreateTimes(createTimes.filter((_, i) => i !== index));
                                     }}
-                                >Remove</button>
+                                >{t("Remove")}</button>
                             </div>
                         ))}
                         <button type="button" className="btn btn-secondary mt-2 block"
                             onClick={() => {
                                 setCreateTimes([...createTimes, { time: "" }]);
                             }}
-                        >Add Time</button>
+                        >{t("Add Time")}</button>
                     </div>
                     <div className="modal-action">
                         <button type="submit" className="btn btn-primary" onClick={() => {
                             if (createWeekdays.length === 0 || createTimes.length === 0) {
-                                setError("Please select at least one weekday and one time.");
+                                setError(t("Please select at least one weekday and one time."));
                                 return;
                             }
                             setError("");
                             createSchedule();
                             setCreateModal(false);
-                        }}>Create</button>
-                        <button type="button" className="btn" onClick={() => setCreateModal(false)}>Cancel</button>
+                        }}>{t("Create")}</button>
+                        <button type="button" className="btn" onClick={() => setCreateModal(false)}>{t("Cancel")}</button>
                     </div>
                 </form>
             </div>
@@ -231,7 +233,7 @@ function ChannelScheduler(props) {
                 onClick={() => {
                     setCreateModal(true);
                 }}
-            >Create Schedule</button>
+            >{t("Create Schedule")}</button>
         </div>
 
         {schedules.length > 0 ? (
@@ -239,10 +241,10 @@ function ChannelScheduler(props) {
                 <table className="table w-full">
                     <thead>
                         <tr>
-                            <th>Weekdays</th>
-                            <th>Times</th>
-                            <th>Status</th>
-                            <th>Actions</th>
+                            <th>{t("Weekdays")}</th>
+                            <th>{t("Times")}</th>
+                            <th>{t("Status")}</th>
+                            <th>{t("Actions")}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -266,20 +268,20 @@ function ChannelScheduler(props) {
                                 </td>
                                 <td>
                                     <span className={`badge ${schedule.is_active ? "badge-success" : "badge-error"}`}>
-                                        {schedule.is_active ? "Active" : "Inactive"}
+                                        {schedule.is_active ? t("Active") : t("Inactive")}
                                     </span>
                                 </td>
                                 <td>
                                     <button className="btn btn-secondary btn-xs m-1" onClick={() => {
                                         updateSchedule(schedule.is_active ? "deactivate" : "activate", schedule.id);
                                     }}>
-                                        {schedule.is_active ? "Deactivate" : "Activate"}
+                                        {schedule.is_active ? t("Deactivate") : t("Activate")}
                                     </button>
                                     <button className="btn btn-error btn-xs m-1" onClick={() => {
                                         setTargetSchedule(schedule.id);
                                         setDeleteModal(true);
                                     }}>
-                                        Delete
+                                        {t("Delete")}
                                     </button>
                                 </td>
                             </tr>
@@ -288,7 +290,7 @@ function ChannelScheduler(props) {
                 </table>
             </div>
         ) : (
-            <p>No schedules found.</p>
+            <p>{t("No schedules found.")}</p>
         )}
 
 

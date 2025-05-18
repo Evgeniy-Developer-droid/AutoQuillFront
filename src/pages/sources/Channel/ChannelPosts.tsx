@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import apiRequest from "../../../requests";
 import { useParams } from 'react-router-dom';
 import ChannelEditPostModal from "./ChannelEditPostModal";
@@ -6,6 +7,7 @@ import ChannelNewPostModal from "./ChannelNewPostModal";
 
 
 function ChannelPosts(props) {
+    const { t } = useTranslation();
     const { channelId } = useParams();
     const [error, setError] = useState("");
     const [posts, setPosts] = useState([]);
@@ -59,10 +61,10 @@ function ChannelPosts(props) {
         })
             .then((response) => {
                 if (response.status !== 200) {
-                    setError(response.data.detail);
+                    setError(t(response.data.detail));
                     return;
                 }
-                setToastMessage(response.data.message);
+                setToastMessage(t(response.data.message));
                 setSuccessSentToast(true);
                 setTimeout(() => {
                     setSuccessSentToast(false);
@@ -71,7 +73,7 @@ function ChannelPosts(props) {
                 setError("");
             })
             .catch((error) => {
-                setError("Failed to generate post");
+                setError(t("Failed to generate post"));
                 console.error(error);
             });
     }
@@ -116,8 +118,8 @@ function ChannelPosts(props) {
 
         {isDeletingPost && <div className="modal modal-open">
             <div className="modal-box">
-                <h2 className="text-xl font-bold">Delete Post</h2>
-                <p>Are you sure you want to delete this post?</p>
+                <h2 className="text-xl font-bold">{t("Delete Post")}</h2>
+                <p>{t("Are you sure you want to delete this post?")}</p>
                 <div className="modal-action">
                     <button className="btn btn-primary" onClick={() => {
                         apiRequest({
@@ -131,24 +133,24 @@ function ChannelPosts(props) {
                                 setError("");
                             })
                             .catch((error) => {
-                                setError("Failed to delete post");
+                                setError(t("Failed to delete post"));
                                 console.error(error);
                             });
-                    }}>Delete</button>
+                    }}>{t("Delete")}</button>
                     <button className="btn" onClick={() => {
                         setIsDeletingPost(false);
                         setTargetPostId(null);
-                    }}>Cancel</button>
+                    }}>{t("Cancel")}</button>
                 </div>
             </div>
         </div>}
 
         {generateAiPostModal && <div className="modal modal-open">
             <div className="modal-box">
-                <h2 className="text-xl font-bold">Generate AI Post</h2>
+                <h2 className="text-xl font-bold">{t("Generate AI Post")}</h2>
                 <input
                     type="text"
-                    placeholder="Enter topic"
+                    placeholder={t("Enter topic")}
                     value={generateAiPostTopic}
                     onChange={(e) => setGenerateAiPostTopic(e.target.value)}
                     className="input input-bordered w-full mb-4"
@@ -157,10 +159,10 @@ function ChannelPosts(props) {
                     <button className="btn btn-primary" onClick={() => {
                         generateAiPost();
                         setGenerateAiPostModal(false);
-                    }}>Generate</button>
+                    }}>{t("Generate")}</button>
                     <button className="btn" onClick={() => {
                         setGenerateAiPostModal(false);
-                    }}>Cancel</button>
+                    }}>{t("Cancel")}</button>
                 </div>
             </div>
         </div>}
@@ -176,18 +178,18 @@ function ChannelPosts(props) {
 
         <div className="flex justify-between items-center mb-4">
             <div className={"flex items-center"}>
-                <button className="btn btn-primary mr-2" onClick={() => setNewPostModal(true)}>Create New Post</button>
-                <button className="btn btn-primary" onClick={() => setGenerateAiPostModal(true)}>Generate AI Post</button>
+                <button className="btn btn-primary mr-2" onClick={() => setNewPostModal(true)}>{t("Create New Post")}</button>
+                <button className="btn btn-primary" onClick={() => setGenerateAiPostModal(true)}>{t("Generate AI Post")}</button>
             </div>
             <button className="btn btn-secondary" onClick={() => {
                 setPage(1);
                 setLimit(10);
-            }}>Reset Filters</button>
+            }}>{t("Reset Filters")}</button>
         </div>
 
         <div className="flex justify-between items-center mb-4">
             <div className="flex items-center">
-                <label htmlFor="limit" className="mr-2">Limit:</label>
+                <label htmlFor="limit" className="mr-2">{t("Limit")}:</label>
                 <select
                     id="limit"
                     value={limit}
@@ -200,7 +202,7 @@ function ChannelPosts(props) {
                 </select>
             </div>
             <div className="flex items-center">
-                <label htmlFor="page" className="mr-2">Page:</label>
+                <label htmlFor="page" className="mr-2">{t("Page")}:</label>
                 <input
                     type="number"
                     id="page"
@@ -222,13 +224,13 @@ function ChannelPosts(props) {
             <table className="table w-full">
                 <thead>
                     <tr>
-                        <th>Post ID</th>
-                        <th>Content</th>
-                        <th>Status</th>
-                        <th>AI Generated</th>
-                        <th>Scheduled time</th>
-                        <th>Created At</th>
-                        <th>Actions</th>
+                        <th>{t("Post ID")}</th>
+                        <th>{t("Content")}</th>
+                        <th>{t("Status")}</th>
+                        <th>{t("AI Generated")}</th>
+                        <th>{t("Scheduled time")}</th>
+                        <th>{t("Created At")}</th>
+                        <th>{t("Actions")}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -238,16 +240,16 @@ function ChannelPosts(props) {
                             <td>{post.content.length > 50 ? post.content.substring(0, 50) + "..." : post.content}</td>
                             <td>
                                 <span className={`badge ${postStatuses[post.status]}`}>
-                                    {post.status}
+                                    {t(post.status)}
                                 </span>
                             </td>
                             <td>
                                 <span className={`badge ${post.ai_generated ? "bg-green-200 text-green-800" : "bg-red-200 text-red-800"}`}>
-                                    {post.ai_generated ? "Yes" : "No"}
+                                    {post.ai_generated ? t("Yes") : t("No")}
                                 </span>
                             </td>
                             <td>
-                                {post.scheduled_time ? new Date(post.scheduled_time).toLocaleString() : "N/A"}
+                                {post.scheduled_time ? new Date(post.scheduled_time).toLocaleString() : t("N/A")}
                             </td>
                             <td>{new Date(post.created_at).toLocaleString()}</td>
                             <td>
@@ -258,7 +260,7 @@ function ChannelPosts(props) {
                                     })
                                         .then((response) => {
                                             if (response.status !== 200) {
-                                                setError(response.data.detail);
+                                                setError(t(response.data.detail));
                                                 return;
                                             }
                                             setSuccessSentToast(true);
@@ -268,18 +270,18 @@ function ChannelPosts(props) {
                                             }, 3000);
                                         })
                                         .catch((error) => {
-                                            setError("Failed to publish post");
+                                            setError(t("Failed to publish post"));
                                             console.error(error);
                                         });
-                                }}>Publish</button>
+                                }}>{t("Publish")}</button>
                                 <button className="btn btn-warning btn-xs m-1" onClick={() => {
                                     setTargetPostId(post.id);
                                     setIsEditingPost(true);
-                                }}>Edit</button>
+                                }}>{t("Edit")}</button>
                                 <button className="btn btn-secondary btn-xs m-1" onClick={() => {
                                     setTargetPostId(post.id);
                                     setIsDeletingPost(true);
-                                }}>Delete</button>
+                                }}>{t("Delete")}</button>
                             </td>
                         </tr>
                     ))}

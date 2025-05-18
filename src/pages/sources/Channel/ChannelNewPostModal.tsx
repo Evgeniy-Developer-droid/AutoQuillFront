@@ -1,9 +1,11 @@
 import {useEffect, useState} from "react";
+import {useTranslation} from "react-i18next";
 import {useParams} from "react-router-dom";
 import apiRequest from "../../../requests";
 
 
 function ChannelNewPostModal({closeModal}) {
+    const {t} = useTranslation();
     const [newPostData, setNewPostData] = useState({});
     const [isSchedulingNewPost, setIsSchedulingNewPost] = useState(false);
     const [error, setError] = useState("");
@@ -31,7 +33,7 @@ function ChannelNewPostModal({closeModal}) {
                 setError("");
             })
             .catch((error) => {
-                setError("Failed to create post");
+                setError(t("Failed to create post"));
                 console.error(error);
             });
     }
@@ -50,30 +52,30 @@ function ChannelNewPostModal({closeModal}) {
 
     return <div className="modal modal-open">
             <div className="modal-box">
-                <h2 className="font-bold text-lg">New Post</h2>
+                <h2 className="font-bold text-lg">{t("New Post")}</h2>
                 {error && <div className="alert alert-error shadow-sm">
                     <div>
                         <span>{error}</span>
                     </div>
                 </div>}
                 <p>Content</p>
-                <textarea className="textarea textarea-bordered w-full h-24" placeholder="Post content"
+                <textarea className="textarea textarea-bordered w-full h-24" placeholder={t("Post content")}
                     value={newPostData?.content || ""}
                     onChange={(e) => {
                         setNewPostData({ ...newPostData, content: e.target.value });
                     }}
                 ></textarea>
-                <p>Status</p>
+                <p>{t("Status")}</p>
                 <select className="select select-bordered w-full"
                         value={newPostData?.status || "draft"}
                     onChange={(e) => {
                         setNewPostData({ ...newPostData, status: e.target.value });
                     }}
                 >
-                    <option value="draft">Draft</option>
-                    <option value="scheduled">Scheduled</option>
+                    <option value="draft">{t("Draft")}</option>
+                    <option value="scheduled">{t("Scheduled")}</option>
                 </select>
-                <p>Schedule Post</p>
+                <p>{t("Schedule Post")}</p>
                 <input type="checkbox" className="toggle toggle-primary"
                     checked={isSchedulingNewPost}
                     onChange={(e) => {
@@ -85,28 +87,28 @@ function ChannelNewPostModal({closeModal}) {
                         setNewPostData({ ...newPostData, scheduled_time: e.target.value });
                     }}
                 />}
-                {isSchedulingNewPost && <p className="text-sm text-gray-500">Your local timezone: {Intl.DateTimeFormat().resolvedOptions().timeZone}</p>}
+                {isSchedulingNewPost && <p className="text-sm text-gray-500">{t("Your local timezone")}: {Intl.DateTimeFormat().resolvedOptions().timeZone}</p>}
                 {isSchedulingNewPost && <input type="text" className="input input-bordered w-full"
                     value={timezone}
                     onChange={(e) => {
                         setTimezone(e.target.value);
                     }}
-                    placeholder="Timezone"
+                    placeholder={t("Timezone")}
                 />}
 
                 <div className="modal-action">
                     <button className="btn btn-primary" onClick={() => {
                         if (!newPostData.content) {
-                            setError("Content is required");
+                            setError(t("Content is required"));
                             return;
                         }
                         if (isSchedulingNewPost && !newPostData.scheduled_time) {
-                            setError("Scheduled time is required");
+                            setError(t("Scheduled time is required"));
                             return;
                         }
                         createPost();
-                    }}>Create Post</button>
-                    <button className="btn" onClick={() => closeModal()}>Close</button>
+                    }}>{t("Create Post")}</button>
+                    <button className="btn" onClick={() => closeModal()}>{t("Close")}</button>
                 </div>
             </div>
         </div>;
