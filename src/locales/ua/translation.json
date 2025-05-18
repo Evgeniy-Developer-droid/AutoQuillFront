@@ -268,5 +268,15 @@
   "failed": "не вдалося",
   "Invalid timezone": "Недійсний часовий пояс",
   "owner": "власник",
-  "editor": "редактор"
+  "editor": "редактор",
+  "Passwords do not match": "Паролі не співпадають",
+  "Incorrect old password": "Невірний старий пароль",
+  "Password updated": "Пароль оновлено",
+  "User updated": "Користувача оновлено",
+  "Update user": "Оновити користувача",
+  "Update": "Оновити",
+  "Update password": "Оновити пароль",
+  "Old password": "Старий пароль",
+  "New password": "Новий пароль",
+  "Repeat new password": "Повторіть новий пароль"
 }

@@ -268,5 +268,15 @@
   "failed": "failed",
   "Invalid timezone": "Invalid timezone",
   "owner": "owner",
-  "editor": "editor"
+  "editor": "editor",
+  "Passwords do not match": "Passwords do not match",
+  "Incorrect old password": "Incorrect old password",
+  "Password updated": "Password updated",
+  "User updated": "User updated",
+  "Update user": "Update user",
+  "Update": "Update",
+  "Update password": "Update password",
+  "Old password": "Old password",
+  "New password": "New password",
+  "Repeat new password": "Repeat new password"
 }
