@@ -62,13 +62,18 @@ function ChannelNewPostModal({closeModal}) {
                         <span>{error}</span>
                     </div>
                 </div>}
-                <p>Content</p>
-                <textarea className="textarea textarea-bordered w-full h-24" placeholder={t("Post content")}
-                    value={newPostData?.content || ""}
-                    onChange={(e) => {
-                        setNewPostData({ ...newPostData, content: e.target.value });
-                    }}
-                ></textarea>
+                <div className="form-control w-full">
+                    <label className="label">
+                        <span className="label-text">{t("Post Content")}</span>
+                    </label>
+                    <textarea className="textarea textarea-bordered h-80 w-full" placeholder={t("Post content")}
+                        value={newPostData?.content || ""}
+                        onChange={(e) => {
+                            setNewPostData({ ...newPostData, content: e.target.value });
+                        }}
+                    ></textarea>
+                </div>
+
                 <p>{t("Status")}</p>
                 <select className="select select-bordered w-full"
                         value={newPostData?.status || "draft"}

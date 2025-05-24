@@ -85,11 +85,11 @@ function ChannelEditPostModal({postId, closeModal}) {
             <div className="modal-box">
                 <h2 className="card-title">{t("Edit Post")}</h2>
                 <form>
-                    <div className="form-control w-full max-w-xs">
+                    <div className="form-control w-full">
                         <label className="label">
                             <span className="label-text">{t("Post Content")}</span>
                         </label>
-                        <textarea className="textarea textarea-bordered h-24" placeholder={t("Post Content")}
+                        <textarea className="textarea textarea-bordered h-80 w-full" placeholder={t("Post Content")}
                             onChange={(e) => {
                                 setPost({ ...post, content: e.target.value });
                                 setUpdateKeys([...updateKeys, "content"]);

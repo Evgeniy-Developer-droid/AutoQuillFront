@@ -54,8 +54,8 @@ function Subscription(props) {
             <div className="card bg-base-300 shadow-xl">
                 <div className="card-body">
                     <h2 className="card-title">{t("Subscription Plan")}</h2>
-                    <p>{t("Plan")}: <span className={"font-bold text-lg"}>{subscription?.plan?.name}</span></p>
-                    <p>{t("Price")}: <span className={"font-bold text-lg"}>{subscription?.plan?.price} $</span></p>
+                    <p><span className={"font-bold text-lg"}>{subscription?.plan?.name}</span></p>
+                    <p><span className={"font-bold text-lg"}>{subscription?.plan?.price} $</span></p>
                     {!subscription?.plan?.is_trial && <p>{t("Last payment at")}: {subscription?.last_payment_at}</p>}
                 </div>
             </div>
@@ -96,8 +96,8 @@ function Subscription(props) {
             <div className="card bg-base-300 shadow-xl">
                 <div className="card-body">
                     <h2 className="card-title">{t("Actions")}</h2>
-                    <button className="btn btn-primary" onClick={() => alert("Upgrade Subscription")}>{t("Upgrade Subscription")}</button>
-                    <button className="btn btn-secondary" onClick={() => alert("Cancel Subscription")}>{t("Cancel Subscription")}</button>
+                    <button className="btn btn-primary">{t("Upgrade Subscription")}</button>
+                    <button className="btn btn-secondary">{t("Cancel Subscription")}</button>
                 </div>
             </div>
         </div>

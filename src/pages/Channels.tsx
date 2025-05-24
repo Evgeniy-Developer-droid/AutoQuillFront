@@ -135,7 +135,7 @@ function Channels() {
                             {channels.map((channel) => (
                                 <tr key={channel.id}>
                                     <td>
-                                        <a href={`/dashboard/channels/${channel.id}`} className="link">
+                                        <a href={`/dashboard/channels/${channel.id}`} className="text-lg">
                                             {channel.name}
                                         </a>
                                     </td>

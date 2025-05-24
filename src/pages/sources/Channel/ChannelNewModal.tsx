@@ -62,7 +62,7 @@ function ChannelNewModal({closeModal}) {
                         onChange={(e) => setChannelType(e.target.value)}
                     >
                         <option value="telegram">{t("Telegram")}</option>
-                        <option value="api">{t("API")}</option>
+                        {/*<option value="api">{t("API")}</option>*/}
                     </select>
                     <button type="submit" className="btn btn-primary mt-4"
                         onClick={submit}
