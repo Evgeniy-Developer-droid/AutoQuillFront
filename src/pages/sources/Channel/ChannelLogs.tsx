@@ -25,6 +25,10 @@ function ChannelLogs() {
             },
         })
             .then((response) => {
+                if (response.status !== 200) {
+                    setError(t(response.data.detail[0].msg));
+                    return;
+                }
                 setLogs(response.data.logs);
                 setTotal(response.data.total);
                 setError("");

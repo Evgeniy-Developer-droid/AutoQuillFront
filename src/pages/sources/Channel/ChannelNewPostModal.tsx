@@ -28,6 +28,10 @@ function ChannelNewPostModal({closeModal}) {
             body: data,
         })
             .then((response) => {
+                if (response.status !== 200 && response.status !== 201) {
+                    setError(t(response.data.detail[0].msg));
+                    return;
+                }
                 closeModal();
                 setNewPostData({});
                 setError("");

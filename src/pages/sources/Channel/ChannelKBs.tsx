@@ -34,6 +34,10 @@ function ChannelKBs(props) {
             },
         })
             .then((response) => {
+                if (response.status !== 200) {
+                    setError(t(response.data.detail[0].msg));
+                    return;
+                }
                 setKbs(response.data.sources);
                 setTotal(response.data.total);
                 setError("");
@@ -53,6 +57,10 @@ function ChannelKBs(props) {
             },
         })
             .then((response) => {
+                if (response.status !== 200) {
+                    setError(t(response.data.detail[0].msg));
+                    return;
+                }
                 setToastMessage(response.data.message);
                 setSuccessSentToast(true);
                 setDeleteModal(false);
@@ -77,6 +85,10 @@ function ChannelKBs(props) {
             }
         })
             .then((response) => {
+                if (response.status !== 200 && response.status !== 201) {
+                    setError(t(response.data.detail[0].msg));
+                    return;
+                }
                 setToastMessage(response.data.message);
                 setSuccessSentToast(true);
                 setCreateModal(false);
@@ -102,6 +114,10 @@ function ChannelKBs(props) {
             }
         })
             .then((response) => {
+                if (response.status !== 200 && response.status !== 201) {
+                    setError(t(response.data.detail[0].msg));
+                    return;
+                }
                 setToastMessage(response.data.message);
                 setSuccessSentToast(true);
                 setCreateModal(false);

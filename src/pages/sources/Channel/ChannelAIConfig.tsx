@@ -21,11 +21,12 @@ function ChannelAiConfig(props) {
             },
         })
             .then((response) => {
+                if (response.status !== 200) {
+                    setError(t(response.data.detail[0].msg));
+                    return;
+                }
                 setConfig(response.data);
             })
-            .catch((error) => {
-                setError(t(error.message));
-            });
     }, []);
 
     const updateConfig = () => {
@@ -50,9 +51,6 @@ function ChannelAiConfig(props) {
                     setToast(false);
                 }, 3000);
             })
-            .catch((error) => {
-                setError(t(error.message));
-            });
     }
 
     return <>

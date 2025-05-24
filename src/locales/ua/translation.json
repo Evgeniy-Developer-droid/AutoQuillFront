@@ -278,5 +278,7 @@
   "Update password": "Оновити пароль",
   "Old password": "Старий пароль",
   "New password": "Новий пароль",
-  "Repeat new password": "Повторіть новий пароль"
+  "Repeat new password": "Повторіть новий пароль",
+  "Rate limit exceeded. Try again later.": "Кількість запитів перевищено. Спробуйте пізніше.",
+  "Knowledge base limit exceeded. Upgrade your plan to add more sources.": "Перевищено ліміт бази знань. Оновіть свій план, щоб додати більше джерел."
 }

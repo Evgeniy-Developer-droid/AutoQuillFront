@@ -278,5 +278,7 @@
   "Update password": "Update password",
   "Old password": "Old password",
   "New password": "New password",
-  "Repeat new password": "Repeat new password"
+  "Repeat new password": "Repeat new password",
+  "Rate limit exceeded. Try again later.": "Rate limit exceeded. Try again later.",
+  "Knowledge base limit exceeded. Upgrade your plan to add more sources.": "Knowledge base limit exceeded. Upgrade your plan to add more sources."
 }

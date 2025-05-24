@@ -39,7 +39,7 @@ function Login() {
                     window.location.href = "/dashboard";
                 } else {
                   console.log(response);
-                    setError(t(response.data.detail));
+                    setError(t(response.data.detail[0].msg));
                 }
             }
         )

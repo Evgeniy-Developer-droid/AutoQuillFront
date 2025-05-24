@@ -1,5 +1,6 @@
 
 
+
 export const kbIcons = {
     "text/plain": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-4 0 64 64">
                         <path d="M5.151-.036c-2.803 0-5.074 2.272-5.074 5.074v53.841c0 2.803 2.271 5.074 5.074 5.074h45.774c2.801 0 5.074-2.271 5.074-5.074v-38.605l-18.902-20.31h-31.946z" fill-rule="evenodd" clip-rule="evenodd" fill="#F9CA06"/>

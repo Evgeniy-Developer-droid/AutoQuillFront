@@ -23,6 +23,10 @@ function ChannelNewModal({closeModal}) {
             },
         })
             .then((response) => {
+                if (response.status !== 201 && response.status !== 200) {
+                    setError(t(response.data.detail[0].msg));
+                    return;
+                }
                 closeModal();
                 setError("");
             })

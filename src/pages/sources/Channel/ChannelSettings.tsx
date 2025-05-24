@@ -18,6 +18,10 @@ function ChannelSettings({ channel_type }) {
             method: "GET",
         })
             .then((response) => {
+                if (response.status !== 200) {
+                    setError(t(response.data.detail[0].msg));
+                    return;
+                }
                 setFormConfig(response.data.config_json);
                 setError("");
             })
@@ -36,6 +40,10 @@ function ChannelSettings({ channel_type }) {
             },
         })
             .then((response) => {
+                if (response.status !== 200) {
+                        setError(t(response.data.detail[0].msg));
+                        return;
+                }
                 setFormConfig(response.data.config_json);
                 setSuccessToast(true);
                 setError("");

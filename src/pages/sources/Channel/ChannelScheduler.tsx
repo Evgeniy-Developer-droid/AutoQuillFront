@@ -38,6 +38,10 @@ function ChannelScheduler(props) {
             },
         })
             .then((response) => {
+                if (response.status !== 200) {
+                    setError(t(response.data.detail[0].msg));
+                    return;
+                }
                 setSchedules(response.data);
                 setError("");
             })
@@ -56,6 +60,10 @@ function ChannelScheduler(props) {
             }
         })
             .then((response) => {
+                if (response.status !== 200) {
+                    setError(t(response.data.detail[0].msg));
+                    return;
+                }
                 setToast(true)
                 setToastMessage(t("Schedule deleted successfully"))
                 getSchedules()
@@ -85,6 +93,10 @@ function ChannelScheduler(props) {
             }
         })
             .then((response) => {
+                if (response.status !== 200 && response.status !== 201) {
+                    setError(t(response.data.detail[0].msg));
+                    return;
+                }
                 setToast(true)
                 setToastMessage(t("Schedule created successfully"))
                 getSchedules()
@@ -110,6 +122,10 @@ function ChannelScheduler(props) {
             }
         })
             .then((response) => {
+                if (response.status !== 200) {
+                    setError(t(response.data.detail[0].msg));
+                    return;
+                }
                 setToast(true)
                 setToastMessage(t("Schedule updated successfully"))
                 getSchedules()

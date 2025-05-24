@@ -39,7 +39,7 @@ function Profile() {
                     });
                 } else {
                     setToast(true);
-                    setToastMessage(t(response.data.detail));
+                    setToastMessage(t(response.data.detail[0].msg));
                     setToastType("error");
                     setTimeout(() => {
                         setToast(false);
@@ -79,7 +79,7 @@ function Profile() {
                 } else {
                     console.log(response);
                     setToast(true);
-                    setToastMessage(t(response.data.detail));
+                    setToastMessage(t(response.data.detail[0].msg));
                     setToastType("error");
                     setTimeout(() => {
                         setToast(false);
@@ -107,7 +107,7 @@ function Profile() {
                     }, 2000);
                 } else {
                     setToast(true);
-                    setToastMessage(t(response.data.detail));
+                    setToastMessage(t(response.data.detail[0].msg));
                     setToastType("error");
                     setTimeout(() => {
                         setToast(false);

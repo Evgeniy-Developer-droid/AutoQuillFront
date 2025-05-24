@@ -40,7 +40,7 @@ function Register() {
                 if (response.status === 200) {
                     window.location.href = "/login?status=registered";
                 } else {
-                    setError(t(response.data.detail));
+                    setError(t(response.data.detail[0].msg));
                 }
             }
         )

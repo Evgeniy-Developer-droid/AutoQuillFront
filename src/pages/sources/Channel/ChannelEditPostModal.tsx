@@ -17,6 +17,10 @@ function ChannelEditPostModal({postId, closeModal}) {
             method: "GET",
         })
             .then((response) => {
+                if (response.status !== 200) {
+                    setError(t(response.data.detail[0].msg));
+                    return;
+                }
                 setPost(response.data);
                 setIsScheduling(!!response.data.scheduled_time);
                 setError("");
