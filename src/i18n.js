@@ -12,12 +12,12 @@ i18n
     detection: {
       checkWhitelist: true,
     },
-    debug: false,
+    debug: true,
     interpolation: {
       escapeValue: false, // no need for react. it escapes by default
     },
     backend: {
-      loadPath: "/src/locales/{{lng}}/{{ns}}.json", // path to translation files
+      loadPath: "/locales/{{lng}}/{{ns}}.json", // path to translation files
     },
   });
 
