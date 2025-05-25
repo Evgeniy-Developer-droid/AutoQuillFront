@@ -280,5 +280,9 @@
   "New password": "Новый пароль",
   "Repeat new password": "Повторите новый пароль",
   "Rate limit exceeded. Try again later.": "Количество запросов превышено. Попробуйте позже.",
-  "Knowledge base limit exceeded. Upgrade your plan to add more sources.": "Превышен лимит базы знаний. Обновите свой тарифный план, чтобы добавить больше источников."
+  "Knowledge base limit exceeded. Upgrade your plan to add more sources.": "Превышен лимит базы знаний. Обновите свой тарифный план, чтобы добавить больше источников.",
+  "Help Center": "Центр помощи",
+  "Telegram Channel ID is required": "Telegram Channel ID обязателен",
+  "Telegram Channel ID must start with @ or -": "Telegram Channel ID должен начинаться с @ или -",
+  "Telegram Bot Token is required": "Telegram Bot Token обязателен"
 }

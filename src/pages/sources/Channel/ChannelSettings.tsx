@@ -32,6 +32,21 @@ function ChannelSettings({ channel_type }) {
     }, []);
 
     const updateChannel = () => {
+        // validate by start with @ or -
+        if (channel_type === "telegram" && !formConfig.telegram_channel_id) {
+            setError(t("Telegram Channel ID is required"));
+            return;
+        }
+        if (channel_type === "telegram"){
+            if(!formConfig.telegram_channel_id.startsWith("@") && !formConfig.telegram_channel_id.startsWith("-")){
+                setError(t("Telegram Channel ID must start with @ or -"));
+                return;
+            }
+        }
+        if (channel_type === "telegram" && !formConfig.telegram_bot_token) {
+            setError(t("Telegram Bot Token is required"));
+            return;
+        }
         apiRequest({
             url: `/api/v1/channels/${channelId}`,
             method: "PUT",
@@ -80,22 +95,22 @@ function ChannelSettings({ channel_type }) {
             channel_type === "telegram" && <div className="flex flex-col gap-4">
                 <label className="label">
                     <span className="label-text">{t("Telegram Bot Token")}</span>
-                    <input type="text" placeholder={t("Telegram Bot Token")} className="input input-bordered w-full"
+                    <input type="text" placeholder="1234567890:ABCdefGhIjKlmnopQRsTUVwXyZ"
+                           className="input input-bordered w-full"
                         value={formConfig?.telegram_bot_token}
                         onChange={(e) => {
                             setFormConfig({ ...formConfig, telegram_bot_token: e.target.value });
                         }}
-                       onBlur={updateChannel}
                     />
                 </label>
                 <label className="label">
                     <span className="label-text">{t("Telegram Channel ID")}</span>
-                    <input type="text" placeholder={t("Telegram Channel ID")} className="input input-bordered w-full"
+                    <input type="text" placeholder="@your_channel_id or -1001234567890"
+                           className="input input-bordered w-full"
                         value={formConfig?.telegram_channel_id}
                         onChange={(e) => {
                             setFormConfig({ ...formConfig, telegram_channel_id: e.target.value });
                         }}
-                        onBlur={updateChannel}
                     />
                 </label>
                 <label className="label">
@@ -105,12 +120,14 @@ function ChannelSettings({ channel_type }) {
                         onChange={(e) => {
                             setFormConfig({ ...formConfig, parse_mode: e.target.value });
                         }}
-                        onBlur={updateChannel}
                     >
                         <option value="markdown">{t("Markdown")}</option>
                         <option value="html">{t("HTML")}</option>
                     </select>
                 </label>
+                <button className="btn btn-primary mt-4 w-min" onClick={updateChannel}>
+                    {t("Save")}
+                </button>
             </div>
         }
         <div className={"mt-3"}></div>

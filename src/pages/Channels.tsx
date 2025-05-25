@@ -46,11 +46,6 @@ function Channels() {
         getChannels();
     }, [page, limit]);
 
-    useEffect(() => {
-        if (!showNewChannelModal) return;
-        getChannels();
-    }, [showNewChannelModal]);
-
     return <>
             {error && <div className="alert alert-error shadow-sm">
                 <div>
@@ -58,7 +53,10 @@ function Channels() {
                 </div>
             </div>}
 
-            { showNewChannelModal && <ChannelNewModal closeModal={() => setShowNewChannelModal(false)} /> }
+            { showNewChannelModal && <ChannelNewModal closeModal={() => {
+                setShowNewChannelModal(false)
+                getChannels();
+            }} /> }
 
         { showDeleteModal && <div className="modal modal-open">
             <div className="modal-box">
@@ -127,7 +125,6 @@ function Channels() {
                             <tr>
                                 <th>{t("Channel Name")}</th>
                                 <th>{t("Channel Type")}</th>
-                                <th>{t("Created At")}</th>
                                 <th>{t("Actions")}</th>
                             </tr>
                         </thead>
@@ -140,7 +137,6 @@ function Channels() {
                                         </a>
                                     </td>
                                     <td>{channel.channel_type}</td>
-                                    <td>{new Date(channel.created_at).toLocaleString()}</td>
                                     <td>
                                         <button className="btn btn-secondary btn-xs m-1" onClick={() => {
                                             setTargetChannel(channel.id);

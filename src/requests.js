@@ -1,7 +1,7 @@
 // requests.js
 
-const API_BASE_URL = 'https://api.autoquill.net';
-// const API_BASE_URL = 'http://localhost:8000';
+// const API_BASE_URL = 'https://api.autoquill.net';
+const API_BASE_URL = 'http://localhost:8000';
 const accessToken = () => localStorage.getItem('access_token');
 const refreshToken = () => localStorage.getItem('refresh_token');
 

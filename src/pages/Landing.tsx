@@ -4,6 +4,12 @@ import { useTranslation } from "react-i18next";
 const Landing = () => {
   const {t} = useTranslation();
 
+  const helpCenterLinks = {
+    en: "https://nutritious-germanium-dd8.notion.site/AutoQuill-Help-Center-1fef064a60af80ee96bcf5b4bee6b569",
+    ru: "https://nutritious-germanium-dd8.notion.site/AutoQuill-Help-Center-RU-1fef064a60af8082b377df42226a9c09",
+    ua: "https://nutritious-germanium-dd8.notion.site/AutoQuill-Help-Center-UA-1fef064a60af80f29393d50df4de92cd"
+  }
+
   return <>
     <div className="bg-white text-gray-900">
       {/* Navbar */}
@@ -15,6 +21,7 @@ const Landing = () => {
           <a href="#use-cases" className="text-gray-700 hover:text-blue-600">{t("Using")}</a>
           <a href="#pricing" className="text-gray-700 hover:text-blue-600">{t("Tariffs")}</a>
           <a href="#faq" className="text-gray-700 hover:text-blue-600">{t("FAQ")}</a>
+          <a href={helpCenterLinks[i18n.language]} className="text-gray-700 hover:text-blue-600">{t("Help Center")}</a>
           <a href={"/login"} className="btn bg-blue-400 text-white hover:bg-blue-700">{t("Log in")}</a>
           <select className={"border rounded-md p-2 bg-white text-gray-700"}
                   defaultValue={i18n.language}
@@ -67,6 +74,17 @@ const Landing = () => {
         </div>
       </section>
 
+      {/* Demo links as buttons with links to telegram channel, discord server, and notion page */}
+      <section className="py-10 px-6 text-center bg-gray-50">
+          <h2 className="text-3xl font-bold mb-6">{t("Demo")}</h2>
+          <div className="flex justify-center gap-4">
+          <a href="https://t.me/autoquill_demo" target="_blank" rel="noopener noreferrer" className="btn bg-blue-600 text-white hover:bg-blue-700">{t("Telegram Channel")}</a>
+          <a href="#" target="_blank" rel="noopener noreferrer" className="btn bg-indigo-600 text-white hover:bg-indigo-700">{t("Discord Server")}</a>
+          <a href={helpCenterLinks[i18n.language]} target="_blank" rel="noopener noreferrer" className="btn bg-green-600 text-white hover:bg-green-700">{t("Notion Help Center")}</a>
+          </div>
+      </section>
+
+
       {/* Use Cases */}
       <section id="use-cases" className="py-20 px-6 bg-gray-50 text-center">
         <h2 className="text-3xl font-bold mb-10">{t("Who uses AutoQuill and how?")}</h2>
@@ -101,24 +119,30 @@ const Landing = () => {
       {/* Pricing */}
       <section id="pricing" className="py-20 px-6 text-center bg-gray-50">
         <h2 className="text-3xl font-bold mb-10">{t("Tariffs")}</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 max-w-6xl mx-auto">
           {[{
             title: "Free",
             code: "FREE",
             price: "0$",
-            features: ["10 " + t("generations/month"), "10 "+t("publications/month"),
+            features: ["30 " + t("generations/month"), "30 "+t("publications/month"),
               t("Available integrations"), t("Knowledge base"), t("Scheduled publications (limited)")]
           }, {
             title: "Start",
             code: "START",
-            price: "10$ / " + t("month"),
-            features: ["100 " + t("generations/month"), "100 " + t("publications/month"),
+            price: "9$ / " + t("month"),
+            features: ["100 " + t("generations/month"), "300 " + t("publications/month"),
               t("Available integrations"), t("Knowledge base"), t("Planned publications")]
           }, {
             title: "Pro",
             code: "PRO",
-            price: "20$ / " + t("month"),
-            features: ["300 " + t("generations/month"), "300 " + t("publications/month"),
+            price: "29$ / " + t("month"),
+            features: ["500 " + t("generations/month"), "1000 " + t("publications/month"),
+              t("Available integrations"), t("Knowledge base"), t("Planned publications")]
+          }, {
+            title: "Business",
+            code: "BUSINESS",
+            price: "79$ / " + t("month"),
+            features: ["2000 " + t("generations/month"), "5000 " + t("publications/month"),
               t("Available integrations"), t("Knowledge base"), t("Planned publications")]
           }].map((plan, i) => (
               <div key={i} className="bg-white p-6 rounded-2xl shadow text-left">
@@ -186,6 +210,18 @@ const Landing = () => {
           ))}
         </div>
       </section>
+
+
+        {/* Social Media Links */}
+        <section className="py-10 px-6 text-center bg-gray-50">
+        <h2 className="text-3xl font-bold mb-6">{t("Follow us")}</h2>
+        <div className="flex justify-center gap-6">
+          <a href="https://t.me/autoquill" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Telegram</a>
+          <a href="#" target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:underline">Discord</a>
+          <a href={helpCenterLinks[i18n.language]} target="_blank" rel="noopener noreferrer" className="text-green-600 hover:underline">Notion Help Center</a>
+        </div>
+        </section>
+
     </div>
   </>
 };
