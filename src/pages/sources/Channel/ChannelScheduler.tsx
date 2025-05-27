@@ -164,7 +164,7 @@ function ChannelScheduler(props) {
 
         {deleteModal && <div className="modal modal-open">
             <div className="modal-box">
-                <h2 className="text-xl font-bold">{t("Delete Schedule")}</h2>
+                <h2 className="text-lg font-bold">{t("Delete Schedule")}</h2>
                 <p>{t("Are you sure you want to delete this schedule?")}</p>
                 <div className="modal-action">
                     <button className="btn btn-primary" onClick={() => {
@@ -178,7 +178,7 @@ function ChannelScheduler(props) {
 
         {createModal && <div className="modal modal-open">
             <div className="modal-box">
-                <h2 className="text-xl font-bold">{t("Create Schedule")}</h2>
+                <h2 className="text-lg font-bold">{t("Create Schedule")}</h2>
                 <form>
                     <div className="form-control">
                         <label className="label">
@@ -245,7 +245,7 @@ function ChannelScheduler(props) {
         </div>}
 
         <div className="flex justify-between items-center mb-4">
-            <button className="btn btn-primary"
+            <button className="btn btn-primary btn-sm"
                 onClick={() => {
                     setCreateModal(true);
                 }}
@@ -269,14 +269,14 @@ function ChannelScheduler(props) {
                                 <td>
                                     <div className="flex items-center flex-wrap">
                                         {schedule.weekdays.map((weekday, index) => (
-                                                <div key={index} className="badge badge-soft badge-accent m-1">{weekdays[weekday]}</div>
+                                                <div key={index} className="badge badge-accent m-1">{weekdays[weekday]}</div>
                                         ))}
                                     </div>
                                 </td>
                                 <td>
                                     <div className="flex items-center flex-wrap">
                                         {schedule.times.map((time, index) => (
-                                                <span key={index} className={"badge badge-soft badge-accent m-1"}>
+                                                <span key={index} className={"badge badge-accent m-1"}>
                                                     {time}
                                                 </span>
                                         ))}

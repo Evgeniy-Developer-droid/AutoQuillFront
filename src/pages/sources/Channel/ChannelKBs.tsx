@@ -162,7 +162,7 @@ function ChannelKBs(props) {
 
         {createModal && <div className="modal modal-open">
             <div className="modal-box">
-                <h2 className="text-xl font-bold">{t("Create Knowledge Base")}</h2>
+                <h2 className="text-lg font-bold">{t("Create Knowledge Base")}</h2>
                 <div className="form-control">
                     <label className="label cursor-pointer m-2">
                         <span className="label-text">{t("File")}</span>
@@ -173,7 +173,7 @@ function ChannelKBs(props) {
                         <input type="radio" name="createType" value="document" checked={createType === "document"} onChange={() => setCreateType("document")} className="radio" />
                     </label>
                     {createType === "file" && <div className={"flex flex-col items-center"}>
-                        <input type="file" onChange={(e) => {
+                        <input type="file" className={"file-input"} onChange={(e) => {
                             if (e.target.files && e.target.files.length > 0) {
                                 setCreateFile(e.target.files[0]);
                             }
@@ -209,7 +209,7 @@ function ChannelKBs(props) {
 
         {deleteModal && <div className="modal modal-open">
             <div className="modal-box">
-                <h2 className="text-xl font-bold">{t("Delete Knowledge Base")}</h2>
+                <h2 className="text-lg font-bold">{t("Delete Knowledge Base")}</h2>
                 <p>{t("Are you sure you want to delete this knowledge base?")}</p>
                 <div className="modal-action">
                     <button className="btn btn-primary" onClick={() => {
@@ -224,12 +224,12 @@ function ChannelKBs(props) {
         </div>}
 
         <div className="flex justify-between items-center mb-4">
-            <button className="btn btn-primary"
+            <button className="btn btn-primary btn-sm"
                 onClick={() => {
                     setCreateModal(true);
                 }}
             >{t("Create New Source")}</button>
-            <button className="btn btn-secondary" onClick={() => {
+            <button className="btn btn-secondary btn-sm" onClick={() => {
                 setPage(1);
                 setLimit(10);
             }}>{t("Reset Filters")}</button>

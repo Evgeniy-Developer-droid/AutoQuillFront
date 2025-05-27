@@ -118,7 +118,7 @@ function ChannelPosts(props) {
 
         {isDeletingPost && <div className="modal modal-open">
             <div className="modal-box">
-                <h2 className="text-xl font-bold">{t("Delete Post")}</h2>
+                <h2 className="text-lg font-bold">{t("Delete Post")}</h2>
                 <p>{t("Are you sure you want to delete this post?")}</p>
                 <div className="modal-action">
                     <button className="btn btn-primary" onClick={() => {
@@ -147,13 +147,13 @@ function ChannelPosts(props) {
 
         {generateAiPostModal && <div className="modal modal-open">
             <div className="modal-box">
-                <h2 className="text-xl font-bold">{t("Generate AI Post")}</h2>
+                <h2 className="text-lg font-bold">{t("Generate AI Post")}</h2>
                 <input
                     type="text"
                     placeholder={t("Enter topic")}
                     value={generateAiPostTopic}
                     onChange={(e) => setGenerateAiPostTopic(e.target.value)}
-                    className="input input-bordered w-full mb-4"
+                    className="input input-bordered w-full mb-2"
                 />
                 <div className="modal-action">
                     <button className="btn btn-primary" onClick={() => {
@@ -178,10 +178,10 @@ function ChannelPosts(props) {
 
         <div className="flex justify-between items-center mb-4">
             <div className={"flex items-center"}>
-                <button className="btn btn-primary mr-2" onClick={() => setNewPostModal(true)}>{t("Create New Post")}</button>
-                <button className="btn btn-primary" onClick={() => setGenerateAiPostModal(true)}>{t("Generate AI Post")}</button>
+                <button className="btn btn-primary btn-sm mr-2" onClick={() => setNewPostModal(true)}>{t("Create New Post")}</button>
+                <button className="btn btn-primary btn-sm" onClick={() => setGenerateAiPostModal(true)}>{t("Generate AI Post")}</button>
             </div>
-            <button className="btn btn-secondary" onClick={() => {
+            <button className="btn btn-secondary btn-sm" onClick={() => {
                 setPage(1);
                 setLimit(10);
             }}>{t("Reset Filters")}</button>

@@ -125,27 +125,26 @@ function Profile() {
                 </div>
             </div>}
 
-        <div className="card bg-base-200 shadow-sm">
+        <div className="card bg-base-300 shadow-sm">
             <div className="card-body">
                 <h2 className="card-title text-2xl">{user.full_name}</h2>
-                <p className={"text-xl"}>{user.email}</p>
-                <p className={"text-xl"}>{t("Last login")}: {new Date(user.last_login).toLocaleString()}</p>
-                <p className={"text-xl"}>{t("Role")}: {user.role}</p>
+                <p className={"text-sm"}>{user.email}</p>
+                <p className={"text-sm"}>{t("Last login")}: {new Date(user.last_login).toLocaleString()}</p>
             </div>
         </div>
         <div className="grid grid-cols-2 gap-4 mt-5">
-            <div className="card bg-base-200 shadow-sm mt-5">
+            <div className="card bg-base-300 shadow-sm mt-5">
                 <div className="card-body">
-                    <h2 className="card-title text-2xl">{t("Update user")}</h2>
+                    <h2 className="card-title text-base">{t("Update user")}</h2>
                     <input type="text" placeholder={t("Full name")} className="input input-bordered w-full mb-5"
                     value={updateUser.full_name}
                            onChange={(e) => setUpdateUser({ ...updateUser, full_name: e.target.value })} />
-                    <button className="btn btn-primary" onClick={updateUserFetch}>{t("Update")}</button>
+                    <button className={"btn btn-primary w-min"} onClick={updateUserFetch}>{t("Update")}</button>
                 </div>
             </div>
-            <div className="card bg-base-200 shadow-sm mt-5">
+            <div className="card bg-base-300 shadow-sm mt-5">
                 <div className="card-body">
-                    <h2 className="card-title text-2xl">{t("Update password")}</h2>
+                    <h2 className="card-title text-base">{t("Update password")}</h2>
                     <input type="password" placeholder={t("Old password")} className="input input-bordered w-full mb-5"
                         value={updatePassword.old_password}
                            onChange={(e) => setUpdatePassword({ ...updatePassword, old_password: e.target.value })} />
@@ -155,7 +154,7 @@ function Profile() {
                     <input type="password" placeholder={t("Repeat new password")} className="input input-bordered w-full mb-5"
                         value={updatePassword.password_repeat}
                            onChange={(e) => setUpdatePassword({ ...updatePassword, password_repeat: e.target.value })} />
-                    <button className="btn btn-primary" onClick={updatePasswordFetch}>{t("Update")}</button>
+                    <button className="btn btn-primary w-min" onClick={updatePasswordFetch}>{t("Update")}</button>
                 </div>
             </div>
         </div>

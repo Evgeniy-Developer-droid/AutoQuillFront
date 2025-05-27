@@ -284,5 +284,10 @@
   "Help Center": "Help Center",
   "Telegram Channel ID is required": "Telegram Channel ID is required",
   "Telegram Channel ID must start with @ or -": "Telegram Channel ID must start with @ or -",
-  "Telegram Bot Token is required": "Telegram Bot Token is required"
+  "Telegram Bot Token is required": "Telegram Bot Token is required",
+  "Are you having trouble with setting up your channel?": "Are you having trouble with setting up your channel?",
+  "Read the documentation": "Read the documentation",
+  "One-time payment": "One-time payment",
+  "generations": "generations",
+  "publications": "publications"
 }

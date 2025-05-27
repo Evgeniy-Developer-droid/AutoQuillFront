@@ -63,7 +63,7 @@ function ChannelLogs() {
                     ))}
                 </select>
             </div>
-            <button className="btn btn-primary ml-4" onClick={getLogs}>{t("Refresh")}</button>
+            <button className="btn btn-primary ml-4 btn-sm" onClick={getLogs}>{t("Refresh")}</button>
         </div>
         <div className="overflow-x-auto">
             <table className="table w-full">

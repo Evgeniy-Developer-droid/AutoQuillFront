@@ -55,80 +55,82 @@ function ChannelAiConfig(props) {
 
     return <>
 
-        <div className="toast toast-top toast-end">
-            {toast && <div className="alert alert-success shadow-sm">
-                <div>
-                    <span>{toastMessage}</span>
-                </div>
-            </div>}
-        </div>
-
-        <div className="container">
-            <h2 className={'text-xl font-bold'}>{t("Channel AI Config")}</h2>
-            {
-                error && <div className="alert alert-error shadow-sm">
+        <div className={"p-4 card bg-base-300 shadow-md"}>
+            <div className="toast toast-top toast-end">
+                {toast && <div className="alert alert-success shadow-sm">
                     <div>
-                        <span>{error}</span>
+                        <span>{toastMessage}</span>
                     </div>
-                </div>
-            }
-            <form onSubmit={(e) => {
-                e.preventDefault();
-                updateConfig();
-            }}>
-                <div className="mb-3">
-                    <label htmlFor="temperature" className="form-label">{t("Temperature")}</label>
-                    <input type="number" className="input input-bordered w-full" id="temperature" value={config.temperature} onChange={(e) => setConfig({ ...config, temperature: e.target.value })} />
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="max_tokens" className="form-label">{t("Max Tokens")}</label>
-                    <input type="number" className="input input-bordered w-full" id="max_tokens" value={config.max_tokens} onChange={(e) => setConfig({ ...config, max_tokens: e.target.value })} />
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="language" className="form-label">{t("Language")}</label>
-                    {/*<input type="text" className="input input-bordered w-full" id="language" value={config.language} onChange={(e) => setConfig({ ...config, language: e.target.value })} />*/}
-                    <select className={"select select-bordered w-full mt-2"} id="language" value={config.language} onChange={(e) => setConfig({ ...config, language: e.target.value })}>
-                        <option value="en">English</option>
-                        <option value="ua">Українська</option>
-                        <option value="ru">Русский</option>
-                    </select>
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="tone" className="form-label">{t("Tone")}</label>
-                    {/*<input type="text" className="input input-bordered w-full" id="tone" value={config.tone} onChange={(e) => setConfig({ ...config, tone: e.target.value })} />*/}
-                    <select className={"select select-bordered w-full mt-2"} id="tone" value={config.tone} onChange={(e) => setConfig({ ...config, tone: e.target.value })}>
-                        <option value="neutral">{t("neutral")}</option>
-                        <option value="formal">{t("formal")}</option>
-                        <option value="informal">{t("informal")}</option>
-                        <option value="friendly">{t("friendly")}</option>
-                        <option value="professional">{t("professional")}</option>
-                    </select>
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="writing_style" className="form-label">{t("Writing Style")}</label>
-                    {/*<input type="text" className="input input-bordered w-full" id="writing_style" value={config.writing_style} onChange={(e) => setConfig({ ...config, writing_style: e.target.value })} />*/}
-                    <select className={"select select-bordered w-full mt-2"} id="writing_style" value={config.writing_style} onChange={(e) => setConfig({ ...config, writing_style: e.target.value })}>
-                        <option value="concise">{t("concise")}</option>
-                        <option value="detailed">{t("detailed")}</option>
-                        <option value="persuasive">{t("persuasive")}</option>
-                        <option value="informative">{t("informative")}</option>
-                    </select>
-                </div>
-                <div className="mb-3">
-                    <fieldset className="fieldset bg-base-100 border-base-300 rounded-box w-64 border p-4">
-                        <label htmlFor="emojis" className="label">
-                            <input type="checkbox" className="checkbox checkbox-info" id="emojis" checked={config.emojis}
-                               onChange={(e) => setConfig({...config, emojis: e.target.checked})}/>
-                            {t("Emojis")}
-                        </label>
-                    </fieldset>
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="custom_instructions" className="form-label">{t("Custom Instructions")}</label>
-                    <textarea className="textarea w-full" id="custom_instructions" value={config.custom_instructions} onChange={(e) => setConfig({ ...config, custom_instructions: e.target.value })}></textarea>
-                </div>
-                <button type="submit" className="btn btn-primary">{t("Save")}</button>
-            </form>
+                </div>}
+            </div>
+
+            <div className="container">
+                <h2 className={'text-lg font-bold'}>{t("Channel AI Config")}</h2>
+                {
+                    error && <div className="alert alert-error shadow-sm">
+                        <div>
+                            <span>{error}</span>
+                        </div>
+                    </div>
+                }
+                <form onSubmit={(e) => {
+                    e.preventDefault();
+                    updateConfig();
+                }}>
+                    <div className="mb-3">
+                        <label htmlFor="temperature" className="form-label">{t("Temperature")}</label>
+                        <input type="number" className="input input-bordered w-full" id="temperature" value={config.temperature} onChange={(e) => setConfig({ ...config, temperature: e.target.value })} />
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="max_tokens" className="form-label">{t("Max Tokens")}</label>
+                        <input type="number" className="input input-bordered w-full" id="max_tokens" value={config.max_tokens} onChange={(e) => setConfig({ ...config, max_tokens: e.target.value })} />
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="language" className="form-label">{t("Language")}</label>
+                        {/*<input type="text" className="input input-bordered w-full" id="language" value={config.language} onChange={(e) => setConfig({ ...config, language: e.target.value })} />*/}
+                        <select className={"select select-bordered w-full mt-2"} id="language" value={config.language} onChange={(e) => setConfig({ ...config, language: e.target.value })}>
+                            <option value="en">English</option>
+                            <option value="ua">Українська</option>
+                            <option value="ru">Русский</option>
+                        </select>
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="tone" className="form-label">{t("Tone")}</label>
+                        {/*<input type="text" className="input input-bordered w-full" id="tone" value={config.tone} onChange={(e) => setConfig({ ...config, tone: e.target.value })} />*/}
+                        <select className={"select select-bordered w-full mt-2"} id="tone" value={config.tone} onChange={(e) => setConfig({ ...config, tone: e.target.value })}>
+                            <option value="neutral">{t("neutral")}</option>
+                            <option value="formal">{t("formal")}</option>
+                            <option value="informal">{t("informal")}</option>
+                            <option value="friendly">{t("friendly")}</option>
+                            <option value="professional">{t("professional")}</option>
+                        </select>
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="writing_style" className="form-label">{t("Writing Style")}</label>
+                        {/*<input type="text" className="input input-bordered w-full" id="writing_style" value={config.writing_style} onChange={(e) => setConfig({ ...config, writing_style: e.target.value })} />*/}
+                        <select className={"select select-bordered w-full mt-2"} id="writing_style" value={config.writing_style} onChange={(e) => setConfig({ ...config, writing_style: e.target.value })}>
+                            <option value="concise">{t("concise")}</option>
+                            <option value="detailed">{t("detailed")}</option>
+                            <option value="persuasive">{t("persuasive")}</option>
+                            <option value="informative">{t("informative")}</option>
+                        </select>
+                    </div>
+                    <div className="mb-3">
+                        <fieldset className="fieldset bg-base-100 border-base-300 rounded-box w-64 border p-4">
+                            <label htmlFor="emojis" className="label">
+                                <input type="checkbox" className="checkbox checkbox-info" id="emojis" checked={config.emojis}
+                                   onChange={(e) => setConfig({...config, emojis: e.target.checked})}/>
+                                {t("Emojis")}
+                            </label>
+                        </fieldset>
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="custom_instructions" className="form-label">{t("Custom Instructions")}</label>
+                        <textarea className="textarea w-full" id="custom_instructions" value={config.custom_instructions} onChange={(e) => setConfig({ ...config, custom_instructions: e.target.value })}></textarea>
+                    </div>
+                    <button type="submit" className="btn btn-primary">{t("Save")}</button>
+                </form>
+            </div>
         </div>
 
     </>;

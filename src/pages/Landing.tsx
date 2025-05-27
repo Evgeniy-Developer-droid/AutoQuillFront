@@ -130,19 +130,19 @@ const Landing = () => {
             title: "Start",
             code: "START",
             price: "9$ / " + t("month"),
-            features: ["100 " + t("generations/month"), "300 " + t("publications/month"),
+            features: ["100 " + t("generations/month"), "100 " + t("publications/month"),
               t("Available integrations"), t("Knowledge base"), t("Planned publications")]
           }, {
             title: "Pro",
             code: "PRO",
             price: "29$ / " + t("month"),
-            features: ["500 " + t("generations/month"), "1000 " + t("publications/month"),
+            features: ["500 " + t("generations/month"), "500 " + t("publications/month"),
               t("Available integrations"), t("Knowledge base"), t("Planned publications")]
           }, {
             title: "Business",
             code: "BUSINESS",
             price: "79$ / " + t("month"),
-            features: ["2000 " + t("generations/month"), "5000 " + t("publications/month"),
+            features: ["2000 " + t("generations/month"), "2000 " + t("publications/month"),
               t("Available integrations"), t("Knowledge base"), t("Planned publications")]
           }].map((plan, i) => (
               <div key={i} className="bg-white p-6 rounded-2xl shadow text-left">
@@ -151,7 +151,27 @@ const Landing = () => {
                 <ul className="space-y-2 mb-4">
                   {plan.features.map((f, idx) => <li key={idx}>• {f}</li>)}
                 </ul>
-                <a href={"/register"} className="btn bg-blue-600 text-white w-full">{t("Turn around")}</a>
+              </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Pricing2 */}
+      <section id="pricing2" className="py-20 px-6 text-center bg-gray-50">
+        <h2 className="text-3xl font-bold mb-10">{t("One-time payment")}</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-6xl mx-auto">
+          {[{
+            title: "Basic Package",
+            code: "BASIC_PACKAGE",
+            price: "5$",
+            features: ["50 " + t("generations"), "50 "+t("publications")]
+          }].map((plan, i) => (
+              <div key={i} className="bg-white p-6 rounded-2xl shadow text-left">
+                <h3 className="text-xl font-bold mb-2">{plan.title}</h3>
+                <p className="text-2xl font-semibold text-blue-600 mb-4">{plan.price}</p>
+                <ul className="space-y-2 mb-4">
+                  {plan.features.map((f, idx) => <li key={idx}>• {f}</li>)}
+                </ul>
               </div>
           ))}
         </div>
@@ -171,7 +191,7 @@ const Landing = () => {
       </section>
 
       {/* Final CTA */}
-      <section className="py-20 px-6 bg-blue-600 text-white text-center">
+      <section className="py-20 px-6 bg-blue-200 text-black text-center">
         <h2 className="text-3xl font-bold mb-6">{t("Ready to try?")}</h2>
         <p className="text-lg mb-6">{t("Upload your file and create unique AI content now")}</p>
         <a href={"/register"} className="btn bg-white text-blue-600 hover:bg-gray-100">{t("Start for free")}</a>

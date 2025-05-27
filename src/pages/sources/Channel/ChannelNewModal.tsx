@@ -54,7 +54,7 @@ function ChannelNewModal({closeModal}) {
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                     />
-                    <label className="label">
+                    <label className="label mt-2">
                         <span className="label-text">{t("Channel Type")}</span>
                     </label>
                     <select className="select select-bordered w-full"
@@ -64,11 +64,11 @@ function ChannelNewModal({closeModal}) {
                         <option value="telegram">{t("Telegram")}</option>
                         {/*<option value="api">{t("API")}</option>*/}
                     </select>
-                    <button type="submit" className="btn btn-primary mt-4"
-                        onClick={submit}
-                    >{t("Create")}</button>
                 </form>
                 <div className="modal-action">
+                    <button type="submit" className="btn btn-primary"
+                        onClick={submit}
+                    >{t("Create")}</button>
                     <button onClick={closeModal} className="btn">{t("Close")}</button>
                 </div>
             </div>

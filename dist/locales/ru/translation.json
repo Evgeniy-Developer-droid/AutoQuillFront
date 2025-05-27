@@ -284,5 +284,10 @@
   "Help Center": "Центр помощи",
   "Telegram Channel ID is required": "Telegram Channel ID обязателен",
   "Telegram Channel ID must start with @ or -": "Telegram Channel ID должен начинаться с @ или -",
-  "Telegram Bot Token is required": "Telegram Bot Token обязателен"
+  "Telegram Bot Token is required": "Telegram Bot Token обязателен",
+  "Are you having trouble with setting up your channel?": "У вас возникли проблемы с настройкой канала?",
+  "Read the documentation": "Прочитайте документацию",
+  "One-time payment": "Одноразовый платеж",
+  "generations": "генераций",
+  "publications": "публикаций"
 }

@@ -81,7 +81,7 @@ function ChannelSettings({ channel_type }) {
                 </div>
             </div>}
         </div>
-        <h3 className={"font-bold mb-4"}>{t("Channel Type")}: {channel_type}</h3>
+        <h3 className={"my-4"}>{t("Channel Type")}: {channel_type}</h3>
 
         {
             error && <div className="alert alert-error shadow-sm">
@@ -92,8 +92,8 @@ function ChannelSettings({ channel_type }) {
         }
 
         {
-            channel_type === "telegram" && <div className="flex flex-col gap-4">
-                <label className="label">
+            channel_type === "telegram" && <div className="p-4 card bg-base-300 shadow-sm mb-4">
+                <label className="label mb-2">
                     <span className="label-text">{t("Telegram Bot Token")}</span>
                     <input type="text" placeholder="1234567890:ABCdefGhIjKlmnopQRsTUVwXyZ"
                            className="input input-bordered w-full"
@@ -103,7 +103,7 @@ function ChannelSettings({ channel_type }) {
                         }}
                     />
                 </label>
-                <label className="label">
+                <label className="label mb-2">
                     <span className="label-text">{t("Telegram Channel ID")}</span>
                     <input type="text" placeholder="@your_channel_id or -1001234567890"
                            className="input input-bordered w-full"
@@ -113,7 +113,7 @@ function ChannelSettings({ channel_type }) {
                         }}
                     />
                 </label>
-                <label className="label">
+                <label className="label mb-2">
                     <span className="label-text">{t("Telegram Formatting Type")}</span>
                     <select className="select select-bordered w-full"
                         value={formConfig?.parse_mode}
@@ -125,14 +125,12 @@ function ChannelSettings({ channel_type }) {
                         <option value="html">{t("HTML")}</option>
                     </select>
                 </label>
-                <button className="btn btn-primary mt-4 w-min" onClick={updateChannel}>
+                <button className="btn btn-primary mt-4 w-min btn-sm" onClick={updateChannel}>
                     {t("Save")}
                 </button>
             </div>
         }
-        <div className={"mt-3"}></div>
-        <hr/>
-        <div className={"mt-3"}></div>
+
         <ChannelAiConfig/>
 
     </>;

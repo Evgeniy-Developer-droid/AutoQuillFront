@@ -153,7 +153,7 @@ function ChannelEditPostModal({postId, closeModal}) {
                             e.preventDefault();
                             updatePost();
                         }}>{t("Save")}</button>
-                        <button type="button" className="btn btn-secondary" onClick={() => {
+                        <button type="button" className="btn" onClick={() => {
                             closeModal();
                         }}>{t("Cancel")}</button>
                     </div>

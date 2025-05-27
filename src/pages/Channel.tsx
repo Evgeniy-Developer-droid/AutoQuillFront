@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import i18n from "i18next";
 import apiRequest from "../requests";
 import { useParams } from 'react-router-dom';
 import ChannelSettings from "./sources/Channel/ChannelSettings";
@@ -44,32 +45,19 @@ function Channel( ) {
         getChannel();
     }, []);
 
-    return <>
+    const helpCenterLinks = {
+        en: {
+            telegram: "https://nutritious-germanium-dd8.notion.site/Telegram-How-to-Add-a-Channel-or-Bot-1fef064a60af81f79b31ce33ddc63952",
+        },
+        ua: {
+            telegram: "https://nutritious-germanium-dd8.notion.site/Telegram-1fef064a60af8044874fd72f249eb2e1",
+        },
+        ru: {
+            telegram: "https://nutritious-germanium-dd8.notion.site/Telegram-1fef064a60af8192b4c8fcb295af0ddb",
+        }
+    }
 
-            {deleteModal && <div className="modal modal-open">
-                <div className="modal-box">
-                    <h2 className="text-xl font-bold">{t("Delete Channel")}</h2>
-                    <p>{t("Are you sure you want to delete this channel?")}</p>
-                    <div className="modal-action">
-                        <button className="btn btn-primary" onClick={() => {
-                            apiRequest({
-                                url: `/api/v1/channels/${channelId}`,
-                                method: "DELETE",
-                            })
-                                .then(() => {
-                                    setDeleteModal(false);
-                                    window.location.href = "/dashboard/channels";
-                                })
-                                .catch((error) => {
-                                    setError(t("Failed to delete channel"));
-                                    console.error(error);
-                                });
-                        }}>{t("Delete")}</button>
-                        <button className="btn" onClick={() => setDeleteModal(false)}>{t("Cancel")}</button>
-                    </div>
-                </div>
-                <div className="modal-backdrop" onClick={() => setDeleteModal(false)}></div>
-            </div>}
+    return <>
 
             {error && <div className="alert alert-error shadow-sm">
                 <div>
@@ -78,20 +66,18 @@ function Channel( ) {
             </div>}
 
             <div className="flex justify-between items-center mb-4">
-                <h1 className="text-2xl font-bold">{t("Channel")}</h1>
+                <h1 className="text-xl font-bold">{t("Channel")}</h1>
                 <div className="flex items-center">
-                    <button className="btn btn-secondary"
-                        onClick={() => {
-                            setDeleteModal(true);
-                        }}
-                    >{t("Delete")}</button>
+                    <p className={"text-sm text-gray-500"}>
+                        {t("Are you having trouble with setting up your channel?")} <a href={helpCenterLinks[i18n.language][channel?.channel_type]} target="_blank" rel="noopener noreferrer" className="link link-primary ml-1">{t("Read the documentation")}</a>
+                    </p>
                 </div>
             </div>
 
 
         <div className="tabs tabs-boxed">
             {tabs.map((tab, index) => (
-                <a key={index} className={`tab  text-xl ${tab.active ? "tab-active" : ""}`} onClick={() => {
+                <a key={index} className={`tab  text-lg ${tab.active ? "tab-active" : ""}`} onClick={() => {
                     setTabs(tabs.map((t, i) => ({ ...t, active: i === index })));
                 }}>
                     {t(tab.name)}
@@ -105,25 +91,21 @@ function Channel( ) {
 
                     {tab.name === "Posts" && (
                         <div className={"p-4 bg-base-200"}>
-                            <h2 className="text-xl font-bold">{t("Posts")}</h2>
                             <ChannelPosts/>
                         </div>
                     )}
                     {tab.name === "Scheduler" && (
                         <div className={"p-4 bg-base-200"}>
-                            <h2 className="text-xl font-bold">{t("Scheduler")}</h2>
                             <ChannelScheduler/>
                         </div>
                     )}
                     {tab.name === "Knowledge Base" && (
                         <div className={"p-4 bg-base-200"}>
-                            <h2 className="text-xl font-bold">{t("Knowledge Base")}</h2>
                             <ChannelKBs/>
                         </div>
                     )}
                     {tab.name === "Settings" && (
                         <div className={"p-4 bg-base-200"}>
-                            <h2 className="text-xl font-bold">{t("Settings")}</h2>
                             <ChannelSettings
                                 channel_type={channel?.channel_type}
                             />

@@ -51,7 +51,7 @@ function Subscription(props) {
         </div>}
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-            <div className="card bg-base-300 shadow-xl">
+            <div className="card bg-base-300 shadow-sm">
                 <div className="card-body">
                     <h2 className="card-title">{t("Subscription Plan")}</h2>
                     <p><span className={"font-bold text-lg"}>{subscription?.plan?.name}</span></p>
@@ -60,12 +60,12 @@ function Subscription(props) {
                 </div>
             </div>
 
-            <div className="card bg-base-300 shadow-xl">
+            <div className="card bg-base-300 shadow-sm">
                 <div className="card-body">
                     <div className={"flex-row items-center justify-between w-full flex"}>
                         <div className="text-xl basis-1/3"></div>
-                        <div className="text-xl basis-1/3">{t("Usage")}</div>
-                        <div className="text-xl basis-1/3">{t("Limit")}</div>
+                        <div className="text-base basis-1/3">{t("Usage")}</div>
+                        <div className="text-base basis-1/3">{t("Limit")}</div>
                     </div>
                     <div className={"flex-row items-center justify-between w-full flex"}>
                         <div className="basis-1/3">{t("AI generation")}</div>
@@ -93,7 +93,7 @@ function Subscription(props) {
                 </div>
             </div>
 
-            <div className="card bg-base-300 shadow-xl">
+            <div className="card bg-base-300 shadow-sm">
                 <div className="card-body">
                     <h2 className="card-title">{t("Actions")}</h2>
                     <button className="btn btn-primary">{t("Upgrade Subscription")}</button>
@@ -103,11 +103,11 @@ function Subscription(props) {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-1 gap-4 mb-4">
-            <div className="card bg-base-300 shadow-xl">
+            <div className="card bg-base-300 shadow-sm">
                 <div className="card-body">
                     <div className={"flex-row items-center justify-between w-full flex"}>
                         <div className="basis-1/3">{t("Balance token")} <span className={"badge badge-outline badge-primary"}>{subscription?.balance_tokens}</span></div>
-                        <div className="basis-1/3 align-middle">{t("Referral code")} <span className={"text-xl font-bold p-2 bg-base-100 rounded-xl"}>{subscription?.referral_code}</span></div>
+                        <div className="basis-1/3 align-middle">{t("Referral code")} <span className={"text-lg p-2 bg-base-100 rounded-xl"}>{subscription?.referral_code}</span></div>
                         <div className="basis-1/3"></div>
                     </div>
                 </div>
@@ -115,7 +115,7 @@ function Subscription(props) {
         </div>
 
         {/* payment history table */}
-        <div className="card bg-base-300 shadow-xl">
+        <div className="card bg-base-300 shadow-sm">
             <div className="card-body">
                 <h2 className="card-title">{t("Payment History")}</h2>
                 <table className="table table-zebra w-full">

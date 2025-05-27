@@ -60,7 +60,7 @@ function Channels() {
 
         { showDeleteModal && <div className="modal modal-open">
             <div className="modal-box">
-                <h2 className="font-bold text-lg">{t("Delete Channel")}</h2>
+                <h2 className="font-bold text-base">{t("Delete Channel")}</h2>
                 <p>{t("Are you sure you want to delete this channel?")}</p>
                 <div className="modal-action">
                     <button className="btn btn-primary" onClick={() => {
@@ -85,8 +85,8 @@ function Channels() {
         </div>}
 
         <div className="flex justify-start items-center mb-4">
-            <h1 className="text-2xl font-bold mr-2">{t("Channels")}</h1>
-            <button className="btn btn-primary" onClick={() => setShowNewChannelModal(true)}>
+            <h1 className="text-lg font-bold mr-2">{t("Channels")}</h1>
+            <button className="btn btn-primary btn-sm" onClick={() => setShowNewChannelModal(true)}>
                 {t("Create New Channel")}
             </button>
         </div>
@@ -120,7 +120,7 @@ function Channels() {
         {
             channels.length > 0 ? (
                 <div className="overflow-x-auto">
-                    <table className="table w-full">
+                    <table className="table bg-base-300 w-full shadow-sm">
                         <thead>
                             <tr>
                                 <th>{t("Channel Name")}</th>
